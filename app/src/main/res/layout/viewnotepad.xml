@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -17,25 +15,26 @@
         <LinearLayout
             android:layout_gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="10dp"
             android:layout_weight="0.75"
             android:orientation="horizontal"
-            android:weightSum="2">
+            android:weightSum="4">
 
             <EditText
                 android:id="@+id/txtname"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="4"
                 android:background="@android:color/transparent"
                 android:gravity="start|center"
                 android:hint="@string/name_of_note_here"
                 android:inputType="textAutoCorrect"
                 android:paddingEnd="0dp"
                 android:paddingStart="15dp"
-                android:textColorHint="@color/colorAccent"
+                android:textAlignment="textStart"
                 android:textColor="@color/colorPrimary"
-                android:textSize="15sp" />
+                android:textColorHint="@color/colorAccent"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -58,6 +57,7 @@
                 android:layout_weight="2"
                 android:inputType="textMultiLine">
             </EditText>
+
         </LinearLayout>
 
     </LinearLayout>

@@ -2,6 +2,7 @@ package com.danielkioko.peachnotes.Accounts;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.danielkioko.peachnotes.IntroTabs.IntroActivity;
@@ -27,11 +29,16 @@ public class Register extends AppCompatActivity {
     private EditText mNameSignUpEditText;
     private EditText mEmailSignUpEditText;
     private EditText mPasswordEditText;
+
+    private TextView welcome;
+
     private Button mSignUpButton;
     private Button mGoToLoginButton;
+
     private FirebaseAuth mAuth;
     private DatabaseReference mUsersDBref;
     private ProgressDialog mDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +54,12 @@ public class Register extends AppCompatActivity {
         mSignUpButton = findViewById(R.id.btnRegister);
         mGoToLoginButton = findViewById(R.id.btnToLogin);
 
+        welcome = findViewById(R.id.tv_welcome);
+        Typeface typefacePeach = Typeface.createFromAsset(getAssets(), "Pacifico.ttf");
+        welcome.setTypeface(typefacePeach);
+
         //firebase assign
         mAuth = FirebaseAuth.getInstance();
-
-        //dialog
         mDialog = new ProgressDialog(this);
 
         /**listen to sign up button click**/
@@ -61,7 +70,6 @@ public class Register extends AppCompatActivity {
                 String email = mEmailSignUpEditText.getText().toString().trim();
                 String password = mPasswordEditText.getText().toString().trim();
 
-
                 if(name.isEmpty()){
                     Toast.makeText(Register.this, "Name cannot be empty!", Toast.LENGTH_SHORT).show();
                 }else if(email.isEmpty()){
@@ -69,6 +77,10 @@ public class Register extends AppCompatActivity {
                 }else if(password.isEmpty()){
                     Toast.makeText(Register.this, "Password cannot be empty", Toast.LENGTH_SHORT).show();
                 }else{
+                    mNameSignUpEditText.setVisibility(View.INVISIBLE);
+                    mEmailSignUpEditText.setVisibility(View.INVISIBLE);
+                    mNameSignUpEditText.setVisibility(View.INVISIBLE);
+                    mSignUpButton.setEnabled(false);
                     signUpUserWithFirebase(name, email, password);
                 }
             }

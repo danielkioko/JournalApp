@@ -35,19 +35,19 @@ public class DisplayNote extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.viewnotepad);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-
-        name = (EditText) findViewById(R.id.txtname);
+        name = findViewById(R.id.txtname);
         Typeface typefaceTitle = Typeface.createFromAsset(getAssets(), "JosefinSans-Bold.ttf");
         name.setTypeface(typefaceTitle);
-        content = (EditText) findViewById(R.id.txtcontent);
+        content = findViewById(R.id.txtcontent);
         Typeface typefaceContent = Typeface.createFromAsset(getAssets(), "JosefinSans-Regular.ttf");
         content.setTypeface(typefaceContent);
 
-        coordinatorLayout = (CoordinatorLayout) findViewById(R.id
+        coordinatorLayout = findViewById(R.id
                 .coordinatorLayout);
         mydb = new NDb(this);
         Bundle extras = getIntent().getExtras();
@@ -65,8 +65,8 @@ public class DisplayNote extends AppCompatActivity {
                 if (!rs.isClosed()) {
                     rs.close();
                 }
-                name.setText((CharSequence) nam);
-                content.setText((CharSequence) contents);
+                name.setText(nam);
+                content.setText(contents);
             }
         }
     }
@@ -79,7 +79,8 @@ public class DisplayNote extends AppCompatActivity {
             }
             return true;
         }
-        public boolean onOptionsItemSelected(MenuItem item) {
+
+    public boolean onOptionsItemSelected(MenuItem item) {
             super.onOptionsItemSelected(item);
             switch (item.getItemId()) {
                 case R.id.Delete:
@@ -108,6 +109,7 @@ public class DisplayNote extends AppCompatActivity {
                     d.setTitle("Are you sure");
                     d.show();
                     return true;
+
                 case R.id.Save:
                     Bundle extras = getIntent().getExtras();
                     Calendar c = Calendar.getInstance();
@@ -134,6 +136,7 @@ public class DisplayNote extends AppCompatActivity {
                                     snackbar = Snackbar
                                             .make(coordinatorLayout, "Your note Updated Successfully!!!", Snackbar.LENGTH_LONG);
                                     snackbar.show();
+
                                 } else {
                                     InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                                     imm.hideSoftInputFromWindow(coordinatorLayout.getWindowToken(), 0);

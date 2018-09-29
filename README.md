@@ -1,5 +1,5 @@
 # JournalApp
-Google Africa Challenge Project
+Google Challenge Project
 
 Requirements To Install Peach Notes - Journal App
 1. Android 6.0 Marshmallow

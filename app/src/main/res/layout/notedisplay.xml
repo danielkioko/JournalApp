@@ -11,15 +11,12 @@
         android:paddingTop="8dp"
         android:gravity="center">
 
-        <ListView
-            android:padding="5dp"
-            android:id="@+id/listView1"
-            android:divider="@android:color/transparent"
-            android:dividerHeight="10.0sp"
+        <com.chauthai.overscroll.RecyclerViewBouncy
+            android:id="@+id/noteRV"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </ListView>
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true" />
 
     </RelativeLayout>
 

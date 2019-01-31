@@ -51,18 +51,6 @@
         android:orientation="vertical"
         android:weightSum="2" >
 
-        <TextView
-            android:id="@+id/txtremark"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="2"
-            android:maxHeight="50dp"
-            android:text="@string/fgvgvkjdvmldngvmdngvmrfrfmmgbn"
-            android:textSize="15sp"
-            android:visibility="gone" />
 
     </LinearLayout>
 

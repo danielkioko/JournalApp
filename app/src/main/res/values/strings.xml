@@ -43,4 +43,11 @@
     <string name="save">SAVE</string>
     <string name="delete">delete</string>
     <string name="profile">Profile</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_profile">Profile</string>
 </resources>

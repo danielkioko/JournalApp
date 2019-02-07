@@ -12,11 +12,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.danielkioko.peachnotes.BackupAndRestore;
+import com.danielkioko.peachnotes.HomeActivity;
 import com.danielkioko.peachnotes.MyNotes;
 import com.danielkioko.peachnotes.R;
 import com.google.android.gms.auth.api.Auth;
@@ -42,7 +42,6 @@ public class LoginActivity extends AppCompatActivity {
     TextView tvPeach;
     Button login, toRegister;
     ProgressDialog progressDialog;
-    Switch dbSwitch;
 
     FirebaseAuth firebaseAuth;
     GoogleApiClient googleApiClient;
@@ -110,6 +109,20 @@ public class LoginActivity extends AppCompatActivity {
                 UserSignInMethod();
             }
         });
+    }
+
+    private void autoLogin() {
+
+        String mail = "new@new.com";
+        String password = "password";
+
+        firebaseAuth.signInWithEmailAndPassword(mail, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+            }
+        });
+
     }
 
     private void logInUsers(String email, String password) {
@@ -208,5 +221,11 @@ public class LoginActivity extends AppCompatActivity {
         }*/
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        autoLogin();
     }
 }

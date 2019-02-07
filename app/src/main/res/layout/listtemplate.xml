@@ -3,9 +3,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="70dp"
-    android:background="@drawable/list_view_rectangle"
-    android:elevation="1dp"
+    android:layout_marginBottom="40dp"
     android:orientation="vertical"
+    android:background="@drawable/rectangle"
     android:weightSum="2">
 
     <LinearLayout
@@ -13,17 +13,16 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="horizontal"
-        android:weightSum="2" >
+        android:weightSum="2">
 
         <TextView
             android:id="@+id/txtnamerow"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
             android:layout_weight="1.2"
-            android:text="@string/lnam"
-            android:padding="4dp"
             android:gravity="start|center"
+            android:padding="4dp"
+            android:text="@string/lnam"
             android:textSize="18sp" />
 
         <TextView
@@ -37,20 +36,10 @@
             android:id="@+id/txtdate"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:gravity="bottom|end"
             android:layout_weight="0.8"
+            android:gravity="center|end"
             android:padding="8dp"
             android:text="@string/ltim" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:weightSum="2" >
-
 
     </LinearLayout>
 

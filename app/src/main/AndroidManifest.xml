@@ -39,6 +39,20 @@
         <activity
             android:name=".IntroTabs.IntroActivity"
             android:label="@string/title_activity_intro"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <meta-data
+            android:name="com.google.android.backup.api_key"
+            android:value="AEdPqrEAAAAIu1Q1NZPgTDKvtaSAEBZFPPh_-h7yyN6_HJH2BA" />
+
+        <service
+            android:name=".BackupService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name=".HomeActivity"
+            android:label=""
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

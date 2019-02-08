@@ -56,9 +56,14 @@ public class MyNotes extends AppCompatActivity {
         });
 
         Cursor c = mydb.fetchAll();
+
         String[] fieldNames = new String[]{NDb.name, NDb._id, NDb.dates, NDb.remark};
-        int[] display = new int[]{R.id.txtnamerow, R.id.txtidrow,
-                R.id.txtdate};
+        int[] display = new int[]{
+                R.id.txtnamerow,
+                R.id.txtidrow,
+                R.id.txtdate
+        };
+
         adapter = new SimpleCursorAdapter(this, R.layout.listtemplate, c, fieldNames,
                 display, 0);
         snackbar = Snackbar
@@ -103,8 +108,6 @@ public class MyNotes extends AppCompatActivity {
         super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
             case R.id.profile:
-                Intent intent = new Intent(getApplicationContext(), ProfileSettings.class);
-                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

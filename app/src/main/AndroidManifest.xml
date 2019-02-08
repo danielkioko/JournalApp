@@ -21,8 +21,7 @@
         <activity
             android:name=".Accounts.LoginActivity"
             android:label="Peach"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".DisplayNote"
             android:label="" />
@@ -31,9 +30,6 @@
             android:label="" />
         <activity
             android:name=".Accounts.Register"
-            android:label="" />
-        <activity
-            android:name=".ProfileSettings"
             android:label="" />
         <activity android:name=".ListTemplateClass" />
 
@@ -50,13 +46,18 @@
             android:name=".HomeActivity"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".FingerprintAuthenticationActivity">
+        <activity
+            android:name=".FingerprintAuthenticationActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".SetupAuthenticationActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

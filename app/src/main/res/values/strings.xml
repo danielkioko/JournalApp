@@ -50,4 +50,10 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_profile">Profile</string>
+
+    <string name="PeachNotes">Fingerprint Authentication</string>
+    <string name="instructions">
+            Place your fingertip on the Home button to verify your identity
+        </string>
+
 </resources>

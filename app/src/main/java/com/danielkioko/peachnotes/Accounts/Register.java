@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.danielkioko.peachnotes.IntroTabs.IntroActivity;
 import com.danielkioko.peachnotes.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -154,9 +153,7 @@ public class Register extends AppCompatActivity {
     }
 
     private void goToInstructions() {
-        Intent intent = new Intent(Register.this, IntroActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
+
     }
 
     private void goToLoginActivity(){

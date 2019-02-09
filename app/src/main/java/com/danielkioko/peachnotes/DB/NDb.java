@@ -32,6 +32,7 @@ public class NDb extends SQLiteOpenHelper {
         db.execSQL("create table mynotes"
                 + "(_id integer primary key, name text,remark text,dates text)");
     }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // TODO Auto-generated method stub
@@ -48,6 +49,7 @@ public class NDb extends SQLiteOpenHelper {
         }
         return mCursor;
     }
+
     public boolean insertNotes(String name, String dates, String remark) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -57,17 +59,20 @@ public class NDb extends SQLiteOpenHelper {
         db.insert(mynotes, null, contentValues);
         return true;
     }
+
     public Cursor getData(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor z = db.rawQuery("select * from " + mynotes + " where _id=" + id
                 + "", null);
         return z;
     }
+
     public int numberOfRows() {
         SQLiteDatabase db = this.getReadableDatabase();
         int numRows = (int) DatabaseUtils.queryNumEntries(db, mynotes);
         return numRows;
     }
+
     public boolean updateNotes(Integer id, String name, String dates,
                                String remark) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -79,11 +84,13 @@ public class NDb extends SQLiteOpenHelper {
                 new String[] { Integer.toString(id) });
         return true;
     }
+
     public Integer deleteNotes(Integer id) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(mynotes, "_id = ? ",
                 new String[] { Integer.toString(id) });
     }
+
     public ArrayList getAll() {
         ArrayList array_list = new ArrayList();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -98,4 +105,5 @@ public class NDb extends SQLiteOpenHelper {
         }
         return array_list;
     }
+
 }

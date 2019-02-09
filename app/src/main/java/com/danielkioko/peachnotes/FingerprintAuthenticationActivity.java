@@ -49,10 +49,8 @@ public class FingerprintAuthenticationActivity extends AppCompatActivity {
         // or higher before executing any fingerprint-related code
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             //Get an instance of KeyguardManager and FingerprintManager//
-            keyguardManager =
-                    (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
-            fingerprintManager =
-                    (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
+            keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+            fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
 
             textView = findViewById(R.id.textview);
 

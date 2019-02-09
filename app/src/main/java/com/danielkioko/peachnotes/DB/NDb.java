@@ -18,6 +18,7 @@ public class NDb extends SQLiteOpenHelper {
     public static final String remark = "remark";
     public static final String dates = "dates";
     public static final String mynotes = "mynotes";
+
     private HashMap hp;
     SQLiteDatabase db;
 

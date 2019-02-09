@@ -19,6 +19,8 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
+import com.danielkioko.peachnotes.DB.NDb;
+
 public class MyNotes extends AppCompatActivity {
 
     private ListView obj;
@@ -107,8 +109,8 @@ public class MyNotes extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
-            case R.id.profile:
-                return true;
+//            case R.id.profile:
+//                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

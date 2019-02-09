@@ -1,4 +1,4 @@
-package com.danielkioko.peachnotes;
+package com.danielkioko.peachnotes.DB;
 
 import android.content.ContentValues;
 import android.content.Context;

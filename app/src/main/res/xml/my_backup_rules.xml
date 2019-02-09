@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen>
+    <!--<full-backup-content>-->
+    <!--<include android:domain="sharedpref" android:path="."/>-->
+    <!--</full-backup-content>-->
+</PreferenceScreen>

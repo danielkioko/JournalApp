@@ -13,6 +13,8 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.danielkioko.peachnotes.DB.NDb;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 

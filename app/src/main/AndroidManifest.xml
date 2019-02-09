@@ -18,29 +18,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".Accounts.LoginActivity"
-            android:label="Peach"
-            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".DisplayNote"
             android:label="" />
+
         <activity
             android:name=".MyNotes"
             android:label="" />
-        <activity
-            android:name=".Accounts.Register"
-            android:label="" />
+
         <activity android:name=".ListTemplateClass" />
 
         <meta-data
             android:name="com.google.android.backup.api_key"
             android:value="AEdPqrEAAAAIu1Q1NZPgTDKvtaSAEBZFPPh_-h7yyN6_HJH2BA" />
-
-        <service
-            android:name=".BackupService"
-            android:enabled="true"
-            android:exported="true" />
 
         <activity
             android:name=".HomeActivity"
@@ -54,10 +45,14 @@
         </activity>
         <activity
             android:name=".FingerprintAuthenticationActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SetupAuthenticationActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ToDoListActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
     </application>
 
 </manifest>

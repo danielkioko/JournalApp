@@ -24,7 +24,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
+import com.danielkioko.peachnotes.DB.NDb;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -58,11 +58,6 @@ public class HomeActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         View headerView = navigationView.getHeaderView(0);
-        TextView name = headerView.findViewById(R.id.theName);
-        name.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
-
-        TextView email = headerView.findViewById(R.id.theMail);
-        email.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
         coordinatorLayout = findViewById(R.id.coordinatorLayout);
         mydb = new NDb(this);
@@ -139,9 +134,9 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_profile) {
-            return true;
-        }
+//        if (id == R.id.action_profile) {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }

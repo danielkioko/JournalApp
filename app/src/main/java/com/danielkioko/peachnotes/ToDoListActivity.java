@@ -1,7 +1,9 @@
 package com.danielkioko.peachnotes;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,6 +16,7 @@ import com.danielkioko.peachnotes.DB.TDDb;
 public class ToDoListActivity extends AppCompatActivity {
 
     ListView listView;
+    FloatingActionButton floatingActionButton;
     TDDb tdDb;
     int id_To_Update = 0;
     String value = "done";
@@ -29,6 +32,14 @@ public class ToDoListActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.todoLV);
         checkBox = findViewById(R.id.checkBox_and_Text);
+
+        floatingActionButton = findViewById(R.id.floatingActionButton);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ToDoListActivity.this, NewToDoActivity.class));
+            }
+        });
 
         tdDb = new TDDb(this);
 
@@ -55,7 +66,7 @@ public class ToDoListActivity extends AppCompatActivity {
         };
 
         adapter = new SimpleCursorAdapter(this, R.layout.todo_template, c, fieldNames, display, 0);
-//        listView.setAdapter(adapter);
+        listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -39,7 +39,9 @@ public class TDDb extends SQLiteOpenHelper {
     public Cursor fetchAll() {
         db = this.getReadableDatabase();
         Cursor cursor = db.query(todo, new String[]{
-                "_id", "note"
+                "_id",
+                "note",
+                "done"
         }, null, null, null, null, null);
         if (cursor != null) {
             cursor.moveToFirst();
@@ -70,7 +72,7 @@ public class TDDb extends SQLiteOpenHelper {
         return numRows;
     }
 
-    public boolean updateToDO(Integer id, String notes, String done) {
+    public boolean updateToDO(Integer id, String note, String done) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("note", note);

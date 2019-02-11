@@ -41,7 +41,7 @@
     <string name="name_of_note_here">Name of note here</string>
     <string name="your_text_here">Your text here</string>
     <string name="save">SAVE</string>
-    <string name="delete">delete</string>
+    <string name="delete">Delete</string>
     <string name="profile">Profile</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>

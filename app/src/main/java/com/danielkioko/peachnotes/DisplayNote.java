@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -23,7 +22,6 @@ public class DisplayNote extends AppCompatActivity {
     private NDb mydb;
     EditText name;
     EditText content;
-    private CoordinatorLayout coordinatorLayout;
     String dateString;
     Bundle extras;
     int id_To_Update = 0;
@@ -36,16 +34,13 @@ public class DisplayNote extends AppCompatActivity {
 
         name = findViewById(R.id.txtname);
         content = findViewById(R.id.txtcontent);
-        coordinatorLayout = findViewById(R.id
-                .coordinatorLayout);
+
         mydb = new NDb(this);
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             int Value = extras.getInt("id");
             if (Value > 0) {
-//                snackbar = Snackbar
-//                        .make(coordinatorLayout, "Note Id : "+String.valueOf(Value), Snackbar.LENGTH_LONG);
-//                snackbar.show();
                 Cursor rs = mydb.getData(Value);
                 id_To_Update = Value;
                 rs.moveToFirst();
@@ -69,6 +64,7 @@ public class DisplayNote extends AppCompatActivity {
         }
         return true;
     }
+
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
@@ -126,38 +122,26 @@ public class DisplayNote extends AppCompatActivity {
             if (Value > 0) {
                 if (content.getText().toString().trim().equals("")
                         || name.getText().toString().trim().equals("")) {
-                    snackbar = Snackbar
-                            .make(coordinatorLayout, "Please fill in name of the note", Snackbar.LENGTH_LONG);
-                    snackbar.show();
+                    Toast.makeText(this, "Please fill in name of the note", Toast.LENGTH_LONG).show();
                 } else {
                     if (mydb.updateNotes(id_To_Update, name.getText()
                             .toString(), dateString, content.getText()
                             .toString())) {
-                        snackbar = Snackbar
-                                .make(coordinatorLayout, "Your note Updated Successfully!!!", Snackbar.LENGTH_LONG);
-                        snackbar.show();
+                        Toast.makeText(this, "Your note Updated Successfully!!!", Toast.LENGTH_LONG).show();
                     } else {
-                        snackbar = Snackbar
-                                .make(coordinatorLayout, "There's an error. That's all I can tell. Sorry!", Snackbar.LENGTH_LONG);
-                        snackbar.show();
+                        Toast.makeText(this, "There's an error. That's all I can tell. Sorry!", Toast.LENGTH_LONG).show();
                     }
                 }
             } else {
                 if (content.getText().toString().trim().equals("")
                         || name.getText().toString().trim().equals("")) {
-                    snackbar = Snackbar
-                            .make(coordinatorLayout, "Please fill in name of the note", Snackbar.LENGTH_LONG);
-                    snackbar.show();
+                    Toast.makeText(this, "Please fill in name of the note", Toast.LENGTH_LONG).show();
                 } else {
                     if (mydb.insertNotes(name.getText().toString(), dateString,
                             content.getText().toString())) {
-                        snackbar = Snackbar
-                                .make(coordinatorLayout, "Added Successfully.", Snackbar.LENGTH_LONG);
-                        snackbar.show();
+                        Toast.makeText(this, "Added Successfully.", Toast.LENGTH_LONG).show();
                     } else {
-                        snackbar = Snackbar
-                                .make(coordinatorLayout, "Unfortunately Task Failed.", Snackbar.LENGTH_LONG);
-                        snackbar.show();
+                        Toast.makeText(this, "Unfortunately Task Failed.", Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -175,4 +159,5 @@ public class DisplayNote extends AppCompatActivity {
         super.onStop();
         quickSave();
     }
+
 }

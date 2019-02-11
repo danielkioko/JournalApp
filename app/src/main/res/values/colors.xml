@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#1F1E1F</color>
-    <color name="colorPrimaryDark">#1f1e1f</color>
-    <color name="colorAccent">#f5f6fa</color>
-    <color name="lynxWhite">#f5f6fa</color>
+    <color name="colorPrimaryDark">#502D55</color>
+    <color name="colorPrimary">#8E4B71</color>
+    <color name="colorAccent">#E7C8B7</color>
+    <color name="lynxWhite">#E6E0DA</color>
 </resources>

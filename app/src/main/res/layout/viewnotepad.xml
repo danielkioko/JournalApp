@@ -1,73 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="10">
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:layout_weight="0.75"
-            android:orientation="horizontal"
-            android:weightSum="4">
+        <EditText
+            android:id="@+id/txtname"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:gravity="start|center"
+            android:hint="@string/name_of_note_here"
+            android:inputType="textAutoCorrect"
+            android:paddingStart="15dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="0dp"
+            android:paddingBottom="10dp"
+            android:singleLine="true"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorPrimary"
+            android:textColorHint="@color/colorPrimary"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/txtname"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:background="@android:color/transparent"
-                android:gravity="start|center"
-                android:hint="@string/name_of_note_here"
-                android:inputType="textAutoCorrect"
-                android:paddingEnd="0dp"
-                android:paddingStart="15dp"
-                android:textAlignment="textStart"
-                android:textColor="@color/colorPrimary"
-                android:textColorHint="@color/colorPrimary"
-                android:textSize="20sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:background="@drawable/rectangle"
-            android:elevation="10dp"
+        <EditText
+            android:id="@+id/txtcontent"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="9.25"
-            android:orientation="vertical"
-            android:weightSum="2">
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="top|left"
+            android:hint="@string/your_text_here"
+            android:inputType="textMultiLine"
+            android:padding="15dp"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtname" />
 
-            <EditText
-                android:id="@+id/txtcontent"
-                android:hint="@string/your_text_here"
-                android:gravity="top|left"
-                android:padding="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:textColor="@color/colorPrimary"
-                android:layout_weight="2"
-                android:inputType="textMultiLine" />
+    </android.support.constraint.ConstraintLayout>
 
-            <Button
-                android:id="@+id/btnSave"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="Save"
-                android:textColor="@color/colorPrimary"
-                android:textAllCaps="false" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-</android.support.design.widget.CoordinatorLayout>
+</android.support.constraint.ConstraintLayout>

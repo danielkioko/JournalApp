@@ -46,6 +46,7 @@ public class HomeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setBackgroundResource(R.color.colorPrimaryDark);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -147,15 +148,15 @@ public class HomeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_data) {
-            // Handle the camera action
+        if (id == R.id.nav_notes) {
+            startActivity(new Intent(this, HomeActivity.class));
+        } else if (id == R.id.nav_todo) {
+            startActivity(new Intent(this, ToDoListActivity.class));
+        } else if (id == R.id.nav_data) {
+
         } else if (id == R.id.nav_security) {
-
+            startActivity(new Intent(this, FingerprintAuthenticationActivity.class));
         } else if (id == R.id.nav_about) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
 
         }
 

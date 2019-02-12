@@ -9,10 +9,6 @@
             android:icon="@drawable/baseline_event_note_black_24dp"
             android:title="Notes" />
         <item
-            android:id="@+id/nav_todo"
-            android:icon="@drawable/round_check_box_black_24dp"
-            android:title="To Do List" />
-        <item
             android:id="@+id/nav_data"
             android:icon="@drawable/round_data_usage_black_24dp"
             android:title="Data" />

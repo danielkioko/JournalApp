@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -19,7 +20,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -81,7 +81,7 @@ public class HomeActivity extends AppCompatActivity
         String[] fieldNames = new String[]{NDb.name, NDb._id, NDb.dates, NDb.remark};
         int[] display = new int[]{R.id.txtnamerow, R.id.txtidrow,
                 R.id.txtdate};
-        adapter = new SimpleCursorAdapter(this, R.layout.listtemplate, c, fieldNames,
+        adapter = new SimpleCursorAdapter(this, R.layout.list_template, c, fieldNames,
                 display, 0);
 
         mylist = findViewById(R.id.noteLV);
@@ -91,15 +91,25 @@ public class HomeActivity extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                     long arg3) {
-                LinearLayout linearLayoutParent = (LinearLayout) arg1;
-                LinearLayout linearLayoutChild = (LinearLayout) linearLayoutParent
-                        .getChildAt(0);
-                CardView cardView = (CardView) linearLayoutParent.getChildAt(0);
 
-                TextView m = (TextView) linearLayoutChild.getChildAt(1);
+//                ConstraintLayout constraintLayoutParent = (ConstraintLayout) arg1;
+//                ConstraintLayout constraintLayoutChild = (ConstraintLayout) constraintLayoutParent
+//                        .getChildAt(0);
+////
+////                LinearLayout linearLayoutParent = (LinearLayout) arg1;
+////                LinearLayout linearLayoutChild = (LinearLayout) linearLayoutParent
+////                        .getChildAt(0);
+//
+//               CardView cardView = (CardView) constraintLayoutParent.getChildAt(0);
+
+                ConstraintLayout constraintLayoutParent = (ConstraintLayout) arg1;
+                CardView cardView = (CardView) constraintLayoutParent.getChildAt(1);
+                ConstraintLayout constraintLayoutChild = (ConstraintLayout)
+                        cardView.getChildAt(0);
+
+                TextView m = (TextView) constraintLayoutChild.getChildAt(1);
                 Bundle dataBundle = new Bundle();
-                dataBundle.putInt("id",
-                        Integer.parseInt(m.getText().toString()));
+                dataBundle.putInt("id", Integer.parseInt(m.getText().toString()));
                 Intent intent = new Intent(getApplicationContext(),
                         DisplayNote.class);
                 intent.putExtras(dataBundle);
@@ -149,9 +159,11 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_notes) {
-            startActivity(new Intent(this, HomeActivity.class));
-        } else if (id == R.id.nav_todo) {
-            startActivity(new Intent(this, ToDoListActivity.class));
+            Context context = getBaseContext();
+            if (context != HomeActivity.this) {
+                startActivity(new Intent(this, HomeActivity.class));
+            } else {
+            }
         } else if (id == R.id.nav_data) {
 
         } else if (id == R.id.nav_security) {

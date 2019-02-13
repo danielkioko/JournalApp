@@ -24,6 +24,10 @@
                 android:id="@+id/nav_about"
                 android:icon="@drawable/round_info_black_24dp"
                 android:title="About" />
+            <item
+                android:id="@+id/nav_feedback"
+                android:icon="@drawable/twotone_feedback_black_24dp"
+                android:title="Feedback" />
         </menu>
     </item>
 

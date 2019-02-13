@@ -20,7 +20,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".FeedbackActivity"
-            android:label="@string/title_activity_feedback"
+            android:label=""
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".DisplayNote"

@@ -170,6 +170,8 @@ public class HomeActivity extends AppCompatActivity
             startActivity(new Intent(this, FingerprintAuthenticationActivity.class));
         } else if (id == R.id.nav_about) {
 
+        } else if (id == R.id.nav_feedback) {
+            startActivity(new Intent(HomeActivity.this, FeedbackActivity.class));
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

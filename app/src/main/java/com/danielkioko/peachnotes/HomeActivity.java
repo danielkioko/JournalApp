@@ -159,11 +159,7 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_notes) {
-            Context context = getBaseContext();
-            if (context != HomeActivity.this) {
-                startActivity(new Intent(this, HomeActivity.class));
-            } else {
-            }
+
         } else if (id == R.id.nav_data) {
 
         } else if (id == R.id.nav_security) {

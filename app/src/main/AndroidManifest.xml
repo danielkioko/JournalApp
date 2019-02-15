@@ -26,10 +26,6 @@
             android:name=".DisplayNote"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".MyNotes"
-            android:label="" />
-        <activity android:name=".ListTemplateClass" />
 
         <meta-data
             android:name="com.google.android.backup.api_key"
@@ -39,6 +35,7 @@
             android:name=".HomeActivity"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar">
+
         </activity>
         <activity
             android:name=".FingerprintAuthenticationActivity"

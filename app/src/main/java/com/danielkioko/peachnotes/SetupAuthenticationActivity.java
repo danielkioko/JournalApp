@@ -4,7 +4,6 @@ import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.KeyguardManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
@@ -15,7 +14,6 @@ import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,7 +36,6 @@ import javax.crypto.SecretKey;
 public class SetupAuthenticationActivity extends AppCompatActivity {
 
     private static final String KEY_NAME = "yourKey";
-    AlertDialog alertDialog;
     TextView textView;
     private Cipher cipher;
     private KeyStore keyStore;
@@ -116,6 +113,8 @@ public class SetupAuthenticationActivity extends AppCompatActivity {
                             KeyProperties.ENCRYPTION_PADDING_PKCS7)
                     .build());
 
+            keyGenerator.generateKey();
+
         } catch (KeyStoreException
                 | NoSuchAlgorithmException
                 | NoSuchProviderException
@@ -161,21 +160,8 @@ public class SetupAuthenticationActivity extends AppCompatActivity {
     }
 
     public void authenticationComplete() {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("All Set!");
-        builder.setPositiveButton("Continue",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(SetupAuthenticationActivity.this, HomeActivity.class));
-                        finish();
-                    }
-                });
-        AlertDialog d = builder.create();
-        d.setTitle("You can safely write your thoughts now");
-        d.show();
-
+        startActivity(new Intent(SetupAuthenticationActivity.this, HomeActivity.class));
+        finish();
     }
 
     private class FingerprintException extends Exception {
@@ -226,7 +212,7 @@ public class SetupAuthenticationActivity extends AppCompatActivity {
         //onAuthenticationFailed is called when the fingerprint doesn’t match with any of the fingerprints registered on the device//
 
         public void onAuthenticationFailed() {
-            Toast.makeText(context, "Authentication failed", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Authentication failed, Try Again", Toast.LENGTH_LONG).show();
         }
 
         @Override
@@ -242,7 +228,7 @@ public class SetupAuthenticationActivity extends AppCompatActivity {
         //onAuthenticationSucceeded is called when a fingerprint has been successfully matched to one of the fingerprints stored on the user’s device//
         public void onAuthenticationSucceeded(
                 FingerprintManager.AuthenticationResult result) {
-            Toast.makeText(context, "Success!", Toast.LENGTH_LONG).show();
+            //Toast.makeText(context, "", Toast.LENGTH_LONG).show();
             authenticationComplete();
         }
 

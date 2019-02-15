@@ -130,7 +130,7 @@ public class DisplayNote extends AppCompatActivity {
             if (Value > 0) {
                 if (content.getText().toString().trim().equals("")
                         || name.getText().toString().trim().equals("")) {
-                    Toast.makeText(this, "Please fill in name of the note", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(this, "Please fill in name of the note", Toast.LENGTH_LONG).show();
                 } else {
                     if (mydb.updateNotes(id_To_Update, name.getText()
                             .toString(), dateString, content.getText()

@@ -86,6 +86,7 @@ public class HomeActivity extends AppCompatActivity
 
         mylist = findViewById(R.id.noteLV);
         mylist.setAdapter(adapter);
+        mylist.setScrollBarSize(0);
 
         mylist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -173,5 +174,6 @@ public class HomeActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+
     }
 }

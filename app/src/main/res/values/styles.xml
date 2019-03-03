@@ -1,16 +1,43 @@
 <resources>
-
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+
+    <!-- Light / Day Mode -->
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="backgroundColor">#f5f0e5</item>
+        <item name="cardBackground">#d4d7db</item>
+        <item name="textColor">#ffffff</item>
+        <item name="hintColor">#c0c0c0</item>
+        <item name="buttonColor">#444c5e</item>
+
     </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+    <!-- Dark / Night Mode -->
+    <style name="DarkAppTheme.NoActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">#212121</item>
+        <item name="colorPrimaryDark">#000000</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="backgroundColor">#303030</item>
+        <item name="cardBackground">#424242</item>
+        <item name="textColor">#ffffff</item>
+        <item name="hintColor">#c0c0c0</item>
+        <item name="buttonColor">#444c5e</item>
+
+    </style>
+
+    <!-- Light / Day Mode -->
+    <style name="Color.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#d4d7db</item>
+        <item name="colorPrimaryDark">#444c5e</item>
+        <item name="colorAccent">#ff642e</item>
+        <item name="backgroundColor">#f5f0e5</item>
+        <item name="cardBackground">#d4d7db</item>
+        <item name="textColor">#ffffff</item>
+        <item name="hintColor">#c0c0c0</item>
+        <item name="buttonColor">#444c5e</item>
+
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

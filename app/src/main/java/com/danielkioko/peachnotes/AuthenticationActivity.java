@@ -33,7 +33,7 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
-public class SetupAuthenticationActivity extends AppCompatActivity {
+public class AuthenticationActivity extends AppCompatActivity {
 
     private static final String KEY_NAME = "yourKey";
     TextView textView;
@@ -160,7 +160,7 @@ public class SetupAuthenticationActivity extends AppCompatActivity {
     }
 
     public void authenticationComplete() {
-        startActivity(new Intent(SetupAuthenticationActivity.this, HomeActivity.class));
+        startActivity(new Intent(AuthenticationActivity.this, HomeActivity.class));
         finish();
     }
 

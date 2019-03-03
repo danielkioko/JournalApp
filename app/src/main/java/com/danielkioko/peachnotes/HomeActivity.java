@@ -2,11 +2,13 @@ package com.danielkioko.peachnotes;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
@@ -19,7 +21,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -30,7 +31,7 @@ public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     NDb mydb;
-    ImageButton btnadd;
+    FloatingActionButton btnadd;
     ListView mylist;
     Menu menu;
     AlertDialog.Builder alertDialogBuilder;
@@ -40,6 +41,8 @@ public class HomeActivity extends AppCompatActivity
     SimpleCursorAdapter adapter;
     Snackbar snackbar;
     private ListView obj;
+    private int id_to_update = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,16 +96,6 @@ public class HomeActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                     long arg3) {
 
-//                ConstraintLayout constraintLayoutParent = (ConstraintLayout) arg1;
-//                ConstraintLayout constraintLayoutChild = (ConstraintLayout) constraintLayoutParent
-//                        .getChildAt(0);
-////
-////                LinearLayout linearLayoutParent = (LinearLayout) arg1;
-////                LinearLayout linearLayoutChild = (LinearLayout) linearLayoutParent
-////                        .getChildAt(0);
-//
-//               CardView cardView = (CardView) constraintLayoutParent.getChildAt(0);
-
                 ConstraintLayout constraintLayoutParent = (ConstraintLayout) arg1;
                 CardView cardView = (CardView) constraintLayoutParent.getChildAt(1);
                 ConstraintLayout constraintLayoutChild = (ConstraintLayout)
@@ -116,6 +109,67 @@ public class HomeActivity extends AppCompatActivity
                 intent.putExtras(dataBundle);
                 startActivity(intent);
                 finish();
+
+            }
+        });
+
+        mylist.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+
+                ConstraintLayout constraintLayoutParent = (ConstraintLayout) arg1;
+                CardView cardView = (CardView) constraintLayoutParent.getChildAt(1);
+                ConstraintLayout constraintLayoutChild = (ConstraintLayout)
+                        cardView.getChildAt(0);
+
+                final TextView m = (TextView) constraintLayoutChild.getChildAt(1);
+                final Bundle dataBundle = new Bundle();
+                final int Value = dataBundle.getInt("id");
+                id_to_update = Value;
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+                builder.setMessage("Options")
+                        .setPositiveButton("DELETE",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                        AlertDialog.Builder deletion_builder = new AlertDialog.Builder(HomeActivity.this);
+                                        deletion_builder.setMessage("Delete Note?")
+                                                .setPositiveButton("YES",
+                                                        new DialogInterface.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(DialogInterface dialog, int which) {
+                                                                id_to_update = Value;
+                                                                mydb.deleteNotes(id_to_update);
+                                                            }
+                                                        });
+
+                                        AlertDialog alertDialog = deletion_builder.create();
+                                        alertDialog.setTitle("Are you sure");
+                                        alertDialog.show();
+                                    }
+                                })
+
+                        .setNegativeButton("EDIT",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                        dataBundle.putInt("id", Integer.parseInt(m.getText().toString()));
+                                        Intent intent = new Intent(getApplicationContext(),
+                                                DisplayNote.class);
+                                        intent.putExtras(dataBundle);
+                                        startActivity(intent);
+
+                                    }
+                                });
+
+                AlertDialog d = builder.create();
+                d.setTitle("");
+                d.show();
+
+                return true;
             }
         });
 
@@ -163,8 +217,8 @@ public class HomeActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_data) {
 
-        } else if (id == R.id.nav_security) {
-            startActivity(new Intent(this, FingerprintAuthenticationActivity.class));
+            startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
+
         } else if (id == R.id.nav_about) {
 
         } else if (id == R.id.nav_feedback) {

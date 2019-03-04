@@ -18,6 +18,7 @@ public class NDb extends SQLiteOpenHelper {
     public static final String remark = "remark";
     public static final String dates = "dates";
     public static final String mynotes = "mynotes";
+    public static final String image = "image";
 
     private HashMap hp;
     SQLiteDatabase db;
@@ -30,7 +31,7 @@ public class NDb extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         // TODO Auto-generated method stub
         db.execSQL("create table mynotes"
-                + "(_id integer primary key, name text,remark text,dates text)");
+                + "(_id integer primary key, name text,remark text,dates text, image text)");
     }
 
     @Override
@@ -43,21 +44,29 @@ public class NDb extends SQLiteOpenHelper {
     public Cursor fetchAll() {
         db = this.getReadableDatabase();
         Cursor mCursor = db.query(mynotes, new String[] { "_id", "name",
-                "dates", "remark" }, null, null, null, null, null);
+                "dates", "remark", "image"}, null, null, null, null, null);
         if (mCursor != null) {
             mCursor.moveToFirst();
         }
         return mCursor;
     }
 
-    public boolean insertNotes(String name, String dates, String remark) {
+    public boolean insertNotes(String name, String dates, String remark, byte[] image) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+
         contentValues.put("name", name);
         contentValues.put("dates", dates);
         contentValues.put("remark", remark);
+        contentValues.put("image", image);
+
         db.insert(mynotes, null, contentValues);
         return true;
+    }
+
+    public void queryData(String sql) {
+        SQLiteDatabase database = getWritableDatabase();
+        database.execSQL(sql);
     }
 
     public Cursor getData(int id) {
@@ -74,12 +83,15 @@ public class NDb extends SQLiteOpenHelper {
     }
 
     public boolean updateNotes(Integer id, String name, String dates,
-                               String remark) {
+                               String remark, byte[] image) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+
         contentValues.put("name", name);
         contentValues.put("dates", dates);
         contentValues.put("remark", remark);
+        contentValues.put("image", image);
+
         db.update(mynotes, contentValues, "_id = ? ",
                 new String[] { Integer.toString(id) });
         return true;
@@ -101,6 +113,7 @@ public class NDb extends SQLiteOpenHelper {
             array_list.add(res.getString(res.getColumnIndex(remark)));
             array_list.add(res.getString(res.getColumnIndex(dates)));
             array_list.add(res.getString(res.getColumnIndex(name)));
+            array_list.add(res.getString(res.getColumnIndex(image)));
             res.moveToNext();
         }
         return array_list;

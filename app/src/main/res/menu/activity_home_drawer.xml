@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
@@ -24,6 +25,13 @@
                 android:id="@+id/nav_feedback"
                 android:icon="@drawable/twotone_feedback_black_24dp"
                 android:title="Feedback" />
+            <item
+                android:id="@+id/app_bar_switch"
+                android:checkable="true"
+                android:checked="false"
+                android:icon="@drawable/baseline_brightness_2_black_24dp"
+                android:title="Dark Mode"
+                app:actionLayout="@layout/switch_item" />
         </menu>
     </item>
 

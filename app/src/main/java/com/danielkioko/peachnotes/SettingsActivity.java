@@ -19,6 +19,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
 import android.view.MenuItem;
+import android.widget.Switch;
 
 import java.util.List;
 
@@ -34,6 +35,8 @@ import java.util.List;
  * API Guide</a> for more information on developing a Settings UI.
  */
 public class SettingsActivity extends AppCompatPreferenceActivity {
+
+    private Switch aSwitch;
 
     /**
      * A preference value change listener that updates the preference's summary
@@ -121,6 +124,38 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setupActionBar();
+
+//        if (AppCompatDelegate.getDefaultNightMode() ==  AppCompatDelegate.MODE_NIGHT_YES) {
+//            setTheme(R.style.DarkAppTheme_NoActionBar);
+//        } else {
+//            setTheme(R.style.AppTheme_NoActionBar);
+//        }
+
+//        aSwitch = findViewById(R.id.dark_mode_switch);
+//
+//        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+//            aSwitch.setChecked(true);
+//        }
+//        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//
+//                if (isChecked) {
+//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//                    restartApp();
+//                } else {
+//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+//                    restartApp();
+//                }
+//
+//            }
+//        });
+
+    }
+
+    private void restartApp() {
+        startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+        finish();
     }
 
     /**

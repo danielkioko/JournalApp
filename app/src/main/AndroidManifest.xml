@@ -18,6 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".Setting"></activity>
         <activity android:name=".BackupActivity"></activity>
         <activity
             android:name=".SettingsActivity"
@@ -51,12 +52,6 @@
         <activity
             android:name=".HomeActivity"
             android:label=""
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".FingerprintAuthenticationActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".AuthenticationActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -64,6 +59,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".FingerprintAuthenticationActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AuthenticationActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

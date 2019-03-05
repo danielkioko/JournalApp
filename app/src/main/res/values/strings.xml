@@ -218,4 +218,7 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
 
+    <string name="file_created">File Created</string>
+    <string name="file_create_error">File Create Error</string>
+
 </resources>

@@ -15,6 +15,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -23,6 +24,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.danielkioko.peachnotes.DB.NDb;
@@ -43,18 +45,26 @@ public class HomeActivity extends AppCompatActivity
     private ListView obj;
     private int id_to_update = 0;
 
+    SharedPref sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        if (sharedPref.loadNightModeState() == true) {
+            setTheme(R.style.DarkAppTheme_NoActionBar);
+        } else {
+            setTheme(R.style.AppTheme_NoActionBar);
+        }
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setBackgroundResource(R.color.colorPrimaryDark);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, null, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -62,6 +72,12 @@ public class HomeActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         View headerView = navigationView.getHeaderView(0);
+
+        Switch aSwitch = findViewById(R.id.switch1);
+
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            aSwitch.setChecked(true);
+        }
 
         coordinatorLayout = findViewById(R.id.coordinatorLayout);
         mydb = new NDb(this);
@@ -175,6 +191,11 @@ public class HomeActivity extends AppCompatActivity
 
     }
 
+    private void restartApp() {
+        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+        finish();
+    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -217,7 +238,7 @@ public class HomeActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_data) {
 
-            startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
+            startActivity(new Intent(HomeActivity.this, Setting.class));
 
         } else if (id == R.id.nav_about) {
 

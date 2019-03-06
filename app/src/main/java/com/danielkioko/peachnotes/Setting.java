@@ -15,6 +15,8 @@ public class Setting extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
+        sharedPref = new SharedPref(this);
+
         if (sharedPref.loadNightModeState() == true) {
             setTheme(R.style.DarkAppTheme_NoActionBar);
         } else {
@@ -48,4 +50,5 @@ public class Setting extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), HomeActivity.class));
         finish();
     }
+
 }

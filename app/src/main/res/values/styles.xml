@@ -18,7 +18,7 @@
     </style>
 
     <!-- Dark / Night Mode -->
-    <style name="DarkAppTheme.NoActionBar" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <style name="DarkAppTheme.NoActionBar" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <item name="colorPrimary">#212121</item>
         <item name="colorPrimaryDark">#000000</item>
         <item name="colorAccent">@color/colorAccent</item>

@@ -138,6 +138,7 @@ public class DisplayNote extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         Calendar c = Calendar.getInstance();
         System.out.println("Current time => " + c.getTime());
+
         SimpleDateFormat df = new SimpleDateFormat("MMM, dd");
         String formattedDate = df.format(c.getTime());
         dateString = formattedDate;
@@ -242,6 +243,7 @@ public class DisplayNote extends AppCompatActivity {
                         Toast.makeText(this, "Unfortunately Task Failed.", Toast.LENGTH_LONG).show();
                     }
                 }
+
             }
         }
     }

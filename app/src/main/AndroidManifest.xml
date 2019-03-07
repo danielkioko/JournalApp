@@ -18,14 +18,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".BookmarksActivity"></activity>
-        <activity android:name=".IntroActivity">
+        <activity android:name=".DisplayStoryActivity"></activity>
+        <activity
+            android:name=".StoriesActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".BookmarksActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".IntroActivity" />
         <activity android:name=".Setting" />
         <activity android:name=".BackupActivity" />
         <activity
@@ -60,7 +64,7 @@
         <activity
             android:name=".HomeActivity"
             android:label=""
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".FingerprintAuthenticationActivity"
             android:theme="@style/AppTheme.NoActionBar" />

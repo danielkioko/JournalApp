@@ -85,6 +85,9 @@ public class BookmarksActivity extends AppCompatActivity {
                     }
                 });
 
+                alertDialog.setView(dialogView);
+                alertDialog.show();
+
             }
         });
 

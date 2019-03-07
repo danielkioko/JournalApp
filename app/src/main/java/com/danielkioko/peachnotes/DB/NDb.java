@@ -30,7 +30,7 @@ public class NDb extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         // TODO Auto-generated method stub
         db.execSQL("create table mynotes"
-                + "(_id integer primary key, name text,remark text,dates text)");
+                + "(_id integer primary key, name text, remark text, dates text)");
     }
 
     @Override

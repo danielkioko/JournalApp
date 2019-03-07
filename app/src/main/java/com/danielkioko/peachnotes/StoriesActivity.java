@@ -1,0 +1,15 @@
+package com.danielkioko.peachnotes;
+
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
+public class StoriesActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_stories);
+
+
+    }
+}

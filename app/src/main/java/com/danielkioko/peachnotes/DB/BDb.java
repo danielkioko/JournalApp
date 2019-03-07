@@ -27,7 +27,7 @@ public class BDb extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // TODO Auto-generated method stub
-        db.execSQL("create table mynotes"
+        db.execSQL("create table mybookmarks"
                 + "(_id integer primary key, title text, url text)");
     }
 

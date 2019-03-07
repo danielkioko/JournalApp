@@ -32,16 +32,19 @@ public class HomeActivity extends AppCompatActivity
 
     NDb mydb;
     FloatingActionButton btnadd;
+
     ListView mylist;
+    CoordinatorLayout coordinatorLayout;
+    SimpleCursorAdapter adapter;
+    private int id_to_update = 0;
+
     Menu menu;
     AlertDialog.Builder alertDialogBuilder;
     AlertDialog alertDialog;
+
     Context context = this;
-    CoordinatorLayout coordinatorLayout;
-    SimpleCursorAdapter adapter;
     Snackbar snackbar;
     private ListView obj;
-    private int id_to_update = 0;
 
     SharedPref sharedPref;
 

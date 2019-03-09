@@ -27,4 +27,19 @@ public class SharedPref {
         return state;
     }
 
+    public void setLockEnabled(Boolean securityState) {
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("Secured", securityState);
+        editor.commit();
+
+    }
+
+    public Boolean loadSecurityState() {
+
+        Boolean state = sharedPreferences.getBoolean("Secured", false);
+        return state;
+
+    }
+
 }

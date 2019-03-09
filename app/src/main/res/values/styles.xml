@@ -2,11 +2,12 @@
     <!-- Base application theme. -->
 
     <!-- Light / Day Mode -->
-    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.DayNight">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="backgroundColor">#f5f0e5</item>
+        <item name="windowNoTitle">true</item>
         <item name="cardBackground">#d4d7db</item>
         <item name="editTextColor">#ffffff</item>
         <item name="textColor">#000000</item>
@@ -14,21 +15,24 @@
         <item name="hintColor">#363636</item>
         <item name="buttonColor">#444c5e</item>
         <item name="cardAccentColor">@color/colorPrimaryDark</item>
+        <!--<item name="android:windowAnimationStyle">@style/windowAnimationTransition</item>-->
 
     </style>
 
     <!-- Dark / Night Mode -->
-    <style name="DarkAppTheme.NoActionBar" parent="Theme.AppCompat.DayNight.DarkActionBar">
+    <style name="DarkAppTheme.NoActionBar" parent="Theme.AppCompat.DayNight">
         <item name="colorPrimary">#212121</item>
         <item name="colorPrimaryDark">#000000</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="backgroundColor">#303030</item>
         <item name="cardBackground">#424242</item>
+        <item name="windowNoTitle">true</item>
         <item name="textColor">#ffffff</item>
         <item name="dateTextColor">#000000</item>
         <item name="hintColor">#c0c0c0</item>
         <item name="buttonColor">#444c5e</item>
         <item name="cardAccentColor">#CECECE</item>
+        <!--<item name="android:windowAnimationStyle">@style/windowAnimationTransition</item>-->
 
     </style>
 
@@ -44,6 +48,11 @@
         <item name="buttonColor">#444c5e</item>
 
     </style>
+
+    <!--<style name="windowAnimationTransition" >-->
+    <!--<item name="android:windowEnterTransition">@android:anim/fade_in</item>-->
+    <!--<item name="android:windowExitTransition">@android:anim/fade_out</item>-->
+    <!--</style>-->
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

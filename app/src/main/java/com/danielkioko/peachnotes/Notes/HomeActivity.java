@@ -1,4 +1,4 @@
-package com.danielkioko.peachnotes;
+package com.danielkioko.peachnotes.Notes;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -15,6 +15,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -26,6 +27,9 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import com.danielkioko.peachnotes.DB.NDb;
+import com.danielkioko.peachnotes.R;
+import com.danielkioko.peachnotes.Setting;
+import com.danielkioko.peachnotes.SharedPref;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -57,8 +61,12 @@ public class HomeActivity extends AppCompatActivity
 
         if (sharedPref.loadNightModeState() == true) {
             setTheme(R.style.DarkAppTheme_NoActionBar);
+            AppCompatDelegate.setDefaultNightMode(
+                    AppCompatDelegate.MODE_NIGHT_YES);
         } else {
             setTheme(R.style.AppTheme_NoActionBar);
+            AppCompatDelegate.setDefaultNightMode(
+                    AppCompatDelegate.MODE_NIGHT_NO);
         }
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -83,6 +91,7 @@ public class HomeActivity extends AppCompatActivity
         btnadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Bundle dataBundle = new Bundle();
                 dataBundle.putInt("id", 0);
                 Intent intent = new Intent(getApplicationContext(),
@@ -189,6 +198,11 @@ public class HomeActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -229,13 +243,9 @@ public class HomeActivity extends AppCompatActivity
         if (id == R.id.nav_notes) {
 
         } else if (id == R.id.nav_data) {
-
             startActivity(new Intent(HomeActivity.this, Setting.class));
-
         } else if (id == R.id.nav_about) {
 
-        } else if (id == R.id.nav_feedback) {
-            startActivity(new Intent(HomeActivity.this, FeedbackActivity.class));
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

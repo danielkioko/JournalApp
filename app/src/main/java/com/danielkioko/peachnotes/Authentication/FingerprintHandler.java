@@ -1,4 +1,4 @@
-package com.danielkioko.peachnotes;
+package com.danielkioko.peachnotes.Authentication;
 
 import android.Manifest;
 import android.annotation.TargetApi;

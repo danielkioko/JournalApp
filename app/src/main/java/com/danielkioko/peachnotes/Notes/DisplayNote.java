@@ -1,4 +1,4 @@
-package com.danielkioko.peachnotes;
+package com.danielkioko.peachnotes.Notes;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -10,12 +10,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.danielkioko.peachnotes.DB.NDb;
+import com.danielkioko.peachnotes.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -25,8 +25,7 @@ public class DisplayNote extends AppCompatActivity {
     private NDb mydb;
     EditText name;
     EditText content;
-    Button button;
-    FloatingActionButton add;
+    FloatingActionButton done, delete;
     ImageView imageView;
     String dateString;
     int id_To_Update = 0;
@@ -56,7 +55,7 @@ public class DisplayNote extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        saveNote();
+        quickSave();
         return;
     }
 
@@ -68,20 +67,18 @@ public class DisplayNote extends AppCompatActivity {
         name = findViewById(R.id.txtname);
         content = findViewById(R.id.txtcontent);
 
-        add = findViewById(R.id.btn_attach);
-        add.setOnClickListener(new View.OnClickListener() {
+        done = findViewById(R.id.btn_done);
+        done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
+                saveNote();
             }
         });
 
         mydb = new NDb(this);
 
-        button = findViewById(R.id.btn_delete);
-        button.setOnClickListener(new View.OnClickListener() {
+        delete = findViewById(R.id.fab_delete);
+        delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(DisplayNote.this);
@@ -243,7 +240,6 @@ public class DisplayNote extends AppCompatActivity {
                         Toast.makeText(this, "Unfortunately Task Failed.", Toast.LENGTH_LONG).show();
                     }
                 }
-
             }
         }
     }

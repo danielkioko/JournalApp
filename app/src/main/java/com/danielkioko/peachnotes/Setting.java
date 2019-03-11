@@ -7,12 +7,11 @@ import android.support.v7.app.AppCompatDelegate;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
-import com.danielkioko.peachnotes.Authentication.AuthenticationActivity;
 import com.danielkioko.peachnotes.Notes.HomeActivity;
 
 public class Setting extends AppCompatActivity {
 
-    SharedPref sharedPref, securityPref;
+    SharedPref sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +19,6 @@ public class Setting extends AppCompatActivity {
         setContentView(R.layout.activity_setting);
 
         sharedPref = new SharedPref(this);
-        securityPref = new SharedPref(this);
 
         if (sharedPref.loadNightModeState() == true) {
             setTheme(R.style.DarkAppTheme_NoActionBar);
@@ -33,7 +31,7 @@ public class Setting extends AppCompatActivity {
         }
 
         Switch aSwitch = findViewById(R.id.switch_dark_mode);
-        Switch bSwitch = findViewById(R.id.screen_lock_switch);
+        Switch bSwitch = findViewById(R.id.backup_switch);
 
         if (sharedPref.loadNightModeState() == true) {
             aSwitch.setChecked(true);
@@ -54,8 +52,10 @@ public class Setting extends AppCompatActivity {
             }
         });
 
-        if (sharedPref.loadSecurityState() == true) {
+        if (sharedPref.loadBackupState() == true) {
             bSwitch.setChecked(true);
+        } else {
+            bSwitch.setChecked(false);
         }
 
         bSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -63,11 +63,9 @@ public class Setting extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
                 if (isChecked) {
-                    sharedPref.setLockEnabled(true);
-                    startActivity(new Intent(Setting.this, AuthenticationActivity.class));
-                    finish();
+                    sharedPref.setBackupEnabled(true);
                 } else {
-                    sharedPref.setLockEnabled(false);
+                    sharedPref.setBackupEnabled(false);
                 }
 
             }

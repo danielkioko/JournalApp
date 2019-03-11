@@ -26,6 +26,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
+import com.danielkioko.peachnotes.Backup;
 import com.danielkioko.peachnotes.DB.NDb;
 import com.danielkioko.peachnotes.R;
 import com.danielkioko.peachnotes.Setting;
@@ -51,10 +52,12 @@ public class HomeActivity extends AppCompatActivity
     private ListView obj;
 
     SharedPref sharedPref;
+    Backup backup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        backup.importDB();
         setContentView(R.layout.activity_home);
 
         sharedPref = new SharedPref(this);

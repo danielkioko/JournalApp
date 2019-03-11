@@ -14,32 +14,25 @@ public class SharedPref {
     }
 
     public void setNightModeState(Boolean state) {
-
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("NightMode", state);
         editor.commit();
-
     }
 
     public Boolean loadNightModeState() {
-
         Boolean state = sharedPreferences.getBoolean("NightMode", false);
         return state;
     }
 
-    public void setLockEnabled(Boolean securityState) {
-
+    public void setBackupEnabled(Boolean state) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("Secured", securityState);
+        editor.putBoolean("BackupEnabled", state);
         editor.commit();
-
     }
 
-    public Boolean loadSecurityState() {
-
-        Boolean state = sharedPreferences.getBoolean("Secured", false);
+    public Boolean loadBackupState() {
+        Boolean state = sharedPreferences.getBoolean("BackupEnabled", true);
         return state;
-
     }
 
 }

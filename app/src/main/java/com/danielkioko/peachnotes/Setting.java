@@ -35,6 +35,7 @@ public class Setting extends AppCompatActivity {
 
         if (sharedPref.loadNightModeState() == true) {
             aSwitch.setChecked(true);
+
         }
 
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

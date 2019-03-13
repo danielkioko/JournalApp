@@ -8,9 +8,7 @@ public class SharedPref {
     SharedPreferences sharedPreferences;
 
     public SharedPref(Context context) {
-
         sharedPreferences = context.getSharedPreferences("filename", Context.MODE_PRIVATE);
-
     }
 
     public void setNightModeState(Boolean state) {

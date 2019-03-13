@@ -57,7 +57,6 @@ public class HomeActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        backup.importDB();
         setContentView(R.layout.activity_home);
 
         sharedPref = new SharedPref(this);

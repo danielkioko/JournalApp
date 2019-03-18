@@ -5,11 +5,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -24,8 +25,8 @@ public class DisplayNote extends AppCompatActivity {
 
     private NDb mydb;
     EditText name;
-    EditText content;
-    FloatingActionButton done, delete;
+    TextInputEditText content;
+    Button done, delete;
     ImageView imageView;
     String dateString;
     int id_To_Update = 0;
@@ -77,7 +78,7 @@ public class DisplayNote extends AppCompatActivity {
 
         mydb = new NDb(this);
 
-        delete = findViewById(R.id.fab_delete);
+        delete = findViewById(R.id.btn_delete);
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -170,6 +171,8 @@ public class DisplayNote extends AppCompatActivity {
                         Intent intent = new Intent(
                                 getApplicationContext(),
                                 HomeActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         finish();
                         Toast.makeText(this, "Added Successfully.", Toast.LENGTH_LONG).show();

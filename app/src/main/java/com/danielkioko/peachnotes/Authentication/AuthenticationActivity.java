@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.danielkioko.peachnotes.Notes.HomeActivity;
 import com.danielkioko.peachnotes.R;
+import com.danielkioko.peachnotes.SharedPref;
 
 import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
@@ -46,12 +47,19 @@ public class AuthenticationActivity extends AppCompatActivity {
     private FingerprintManager.CryptoObject cryptoObject;
     private FingerprintManager fingerprintManager;
     private KeyguardManager keyguardManager;
+    SharedPref sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setup_authentication);
 
+        sharedPref = new SharedPref(this);
+
+        if (!sharedPref.loadLockState()) {
+            startActivity(new Intent(AuthenticationActivity.this, HomeActivity.class));
+        }
+
+        setContentView(R.layout.activity_setup_authentication);
         textView = findViewById(R.id.textview4);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

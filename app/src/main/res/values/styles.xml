@@ -36,19 +36,6 @@
 
     </style>
 
-    <!-- Light / Day Mode -->
-    <style name="Color.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">#d4d7db</item>
-        <item name="colorPrimaryDark">#444c5e</item>
-        <item name="colorAccent">#ff642e</item>
-        <item name="backgroundColor">#f5f0e5</item>
-        <item name="cardBackground">#d4d7db</item>
-        <item name="textColor">#ffffff</item>
-        <item name="hintColor">#c0c0c0</item>
-        <item name="buttonColor">#444c5e</item>
-
-    </style>
-
     <!--<style name="windowAnimationTransition" >-->
     <!--<item name="android:windowEnterTransition">@android:anim/fade_in</item>-->
     <!--<item name="android:windowExitTransition">@android:anim/fade_out</item>-->

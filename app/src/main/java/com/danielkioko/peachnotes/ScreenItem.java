@@ -34,4 +34,5 @@ public class ScreenItem {
     public void setScreenImage(int screenImage) {
         ScreenImage = screenImage;
     }
+
 }

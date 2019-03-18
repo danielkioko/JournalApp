@@ -33,4 +33,15 @@ public class SharedPref {
         return state;
     }
 
+    public void setLockState(Boolean state) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("LockMode", state);
+        editor.commit();
+    }
+
+    public Boolean loadLockState() {
+        Boolean state = sharedPreferences.getBoolean("LockEnabled", false);
+        return state;
+    }
+
 }

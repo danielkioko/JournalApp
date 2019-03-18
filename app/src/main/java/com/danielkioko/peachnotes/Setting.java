@@ -32,10 +32,10 @@ public class Setting extends AppCompatActivity {
 
         Switch aSwitch = findViewById(R.id.switch_dark_mode);
         Switch bSwitch = findViewById(R.id.backup_switch);
+        Switch cSwitch = findViewById(R.id.switch_fingerprint_unlock);
 
-        if (sharedPref.loadNightModeState() == true) {
+        if (sharedPref.loadNightModeState()) {
             aSwitch.setChecked(true);
-
         }
 
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -53,7 +53,7 @@ public class Setting extends AppCompatActivity {
             }
         });
 
-        if (sharedPref.loadBackupState() == true) {
+        if (sharedPref.loadBackupState()) {
             bSwitch.setChecked(true);
         } else {
             bSwitch.setChecked(false);
@@ -67,6 +67,25 @@ public class Setting extends AppCompatActivity {
                     sharedPref.setBackupEnabled(true);
                 } else {
                     sharedPref.setBackupEnabled(false);
+                }
+
+            }
+        });
+
+        if (sharedPref.loadLockState()) {
+            cSwitch.setChecked(true);
+        } else {
+            cSwitch.setChecked(false);
+        }
+
+        cSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (isChecked) {
+                    sharedPref.setLockState(true);
+                } else {
+                    sharedPref.setLockState(false);
                 }
 
             }

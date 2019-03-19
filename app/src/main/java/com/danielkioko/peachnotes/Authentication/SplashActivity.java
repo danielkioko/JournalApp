@@ -28,7 +28,7 @@ import android.widget.Toast;
 
 import com.danielkioko.peachnotes.Notes.HomeActivity;
 import com.danielkioko.peachnotes.R;
-import com.danielkioko.peachnotes.SharedPref;
+import com.danielkioko.peachnotes.SettingsAndPreferences.SecurityPref;
 
 import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
@@ -58,7 +58,8 @@ public class SplashActivity extends AppCompatActivity {
     private FingerprintManager.CryptoObject cryptoObject;
     private FingerprintManager fingerprintManager;
     private KeyguardManager keyguardManager;
-    SharedPref sharedPref;
+
+    SecurityPref securityPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,75 +71,93 @@ public class SplashActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_splash);
 
+        securityPref = new SecurityPref(this);
+
         textView = findViewById(R.id.tvPaperPen);
 
         AssetManager assetManager = getApplicationContext().getAssets();
         Typeface typeface = Typeface.createFromAsset(assetManager, String.format(Locale.US, "fonts/%s", "Pacifico.ttf"));
         textView.setTypeface(typeface);
 
-        final View myLayout = findViewById(R.id.splashScreen);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
+        if (securityPref.loadSecurityCheck()) {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(SplashActivity.this).setNegativeButton("Cancel",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                finish();
-                                moveTaskToBack(true);
+            final View myLayout = findViewById(R.id.splashScreen);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(SplashActivity.this).setNegativeButton("Cancel",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finish();
+                                    moveTaskToBack(true);
+                                }
+                            });
+
+                    AlertDialog d = builder.create();
+                    d.setTitle("Just Verifying It's You");
+                    builder.setMessage("Place your finger on the sensor");
+                    d.setIcon(R.drawable.baseline_fingerprint_black_18dp);
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+                        keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+                        fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
+
+                        if (!fingerprintManager.isHardwareDetected()) {
+                            d.setTitle("Your device doesn't support fingerprint authentication");
+                        }
+
+                        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
+                            d.setTitle("Please enable the fingerprint permission");
+                        }
+
+                        if (!fingerprintManager.hasEnrolledFingerprints()) {
+                            d.setTitle("No fingerprint configured. Please register at least one fingerprint in your device's Settings");
+                        }
+
+                        if (!keyguardManager.isKeyguardSecure()) {
+                            d.setTitle("Please enable lockscreen security in your device's Settings");
+                        } else {
+
+                            try {
+                                generateKey();
+                            } catch (FingerprintException e) {
+                                e.printStackTrace();
                             }
-                        });
 
-                AlertDialog d = builder.create();
-                d.setTitle("Just Verifying It's You");
-                builder.setMessage("Place your finger on the sensor");
-                d.setIcon(R.drawable.baseline_fingerprint_black_18dp);
+                            if (initCipher()) {
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                cryptoObject = new FingerprintManager.CryptoObject(cipher);
 
-                    keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
-                    fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
+                                FingerprintHandlerTwo helper = new FingerprintHandlerTwo(getApplicationContext());
+                                helper.startAuth(fingerprintManager, cryptoObject);
 
-                    if (!fingerprintManager.isHardwareDetected()) {
-                        builder.setMessage("Your device doesn't support fingerprint authentication");
-                    }
-
-                    if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
-                        builder.setMessage("Please enable the fingerprint permission");
-                    }
-
-                    if (!fingerprintManager.hasEnrolledFingerprints()) {
-                        builder.setMessage("No fingerprint configured. Please register at least one fingerprint in your device's Settings");
-                    }
-
-                    if (!keyguardManager.isKeyguardSecure()) {
-                        builder.setMessage("Please enable lockscreen security in your device's Settings");
-                    } else {
-
-                        try {
-                            generateKey();
-                        } catch (FingerprintException e) {
-                            e.printStackTrace();
-                        }
-
-                        if (initCipher()) {
-
-                            cryptoObject = new FingerprintManager.CryptoObject(cipher);
-
-                            FingerprintHandlerTwo helper = new FingerprintHandlerTwo(getApplicationContext());
-                            helper.startAuth(fingerprintManager, cryptoObject);
+                            }
 
                         }
 
                     }
+
+                    d.show();
 
                 }
+            }, TIME_OUT);
 
-                d.show();
-
-            }
-        }, TIME_OUT);
+        } else {
+            final View myLayout = findViewById(R.id.splashScreen);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    finish();
+                }
+            }, 3000);
+        }
 
     }
 

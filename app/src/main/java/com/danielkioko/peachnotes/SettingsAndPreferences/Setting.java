@@ -1,4 +1,4 @@
-package com.danielkioko.peachnotes;
+package com.danielkioko.peachnotes.SettingsAndPreferences;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,10 +9,12 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import com.danielkioko.peachnotes.Notes.HomeActivity;
+import com.danielkioko.peachnotes.R;
 
 public class Setting extends AppCompatActivity {
 
     SharedPref sharedPref;
+    SecurityPref securityPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,7 @@ public class Setting extends AppCompatActivity {
         final DrawerLayout drawer = findViewById(R.id.drawer_layout);
 
         sharedPref = new SharedPref(this);
+        securityPref = new SecurityPref(this);
 
         if (sharedPref.loadNightModeState() == true) {
             setTheme(R.style.DarkAppTheme_NoActionBar);
@@ -75,7 +78,7 @@ public class Setting extends AppCompatActivity {
             }
         });
 
-        if (sharedPref.loadLockState()) {
+        if (securityPref.loadSecurityCheck()) {
             cSwitch.setChecked(true);
         } else {
             cSwitch.setChecked(false);
@@ -86,9 +89,9 @@ public class Setting extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
                 if (isChecked) {
-                    sharedPref.setLockState(true);
+                    securityPref.setLockPrefState(true);
                 } else {
-                    sharedPref.setLockState(false);
+                    securityPref.setLockPrefState(false);
                 }
 
             }

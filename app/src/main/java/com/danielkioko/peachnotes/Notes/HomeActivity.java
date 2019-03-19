@@ -33,8 +33,8 @@ import android.widget.TextView;
 import com.danielkioko.peachnotes.Backup;
 import com.danielkioko.peachnotes.DB.NDb;
 import com.danielkioko.peachnotes.R;
-import com.danielkioko.peachnotes.Setting;
-import com.danielkioko.peachnotes.SharedPref;
+import com.danielkioko.peachnotes.SettingsAndPreferences.Setting;
+import com.danielkioko.peachnotes.SettingsAndPreferences.SharedPref;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -228,6 +228,7 @@ public class HomeActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+            finish();
         }
     }
 

@@ -15,7 +15,6 @@ import android.widget.Button;
 
 import com.danielkioko.peachnotes.Notes.HomeActivity;
 import com.danielkioko.peachnotes.R;
-import com.danielkioko.peachnotes.ScreenItem;
 
 import java.util.ArrayList;
 import java.util.List;

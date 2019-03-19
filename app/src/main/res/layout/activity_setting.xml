@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    tools:context=".Setting">
+    tools:context=".SettingsAndPreferences.Setting">
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardView2"

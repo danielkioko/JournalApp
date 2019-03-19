@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.danielkioko.peachnotes.R;
-import com.danielkioko.peachnotes.ScreenItem;
 
 import java.util.List;
 

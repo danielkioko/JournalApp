@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Environment;
 import android.os.IBinder;
 
+import com.danielkioko.peachnotes.SettingsAndPreferences.SharedPref;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

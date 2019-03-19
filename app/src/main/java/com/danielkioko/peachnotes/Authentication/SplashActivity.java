@@ -2,19 +2,27 @@ package com.danielkioko.peachnotes.Authentication;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.app.KeyguardManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CancellationSignal;
+import android.os.Handler;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,16 +39,19 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
+import java.util.Locale;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
-public class AuthenticationActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity {
+
+    TextView textView;
 
     private static final String KEY_NAME = "yourKey";
-    TextView textView;
+    private static int TIME_OUT = 2000;
     private Cipher cipher;
     private KeyStore keyStore;
     private KeyGenerator keyGenerator;
@@ -53,54 +64,81 @@ public class AuthenticationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        sharedPref = new SharedPref(this);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        if (!sharedPref.loadLockState()) {
-            startActivity(new Intent(AuthenticationActivity.this, HomeActivity.class));
-        }
+        setContentView(R.layout.activity_splash);
 
-        setContentView(R.layout.activity_setup_authentication);
-        textView = findViewById(R.id.textview4);
+        textView = findViewById(R.id.tvPaperPen);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        AssetManager assetManager = getApplicationContext().getAssets();
+        Typeface typeface = Typeface.createFromAsset(assetManager, String.format(Locale.US, "fonts/%s", "Pacifico.ttf"));
+        textView.setTypeface(typeface);
 
-            keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
-            fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
+        final View myLayout = findViewById(R.id.splashScreen);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
 
-            if (!fingerprintManager.isHardwareDetected()) {
-                textView.setText("Your device doesn't support fingerprint authentication");
-            }
+                AlertDialog.Builder builder = new AlertDialog.Builder(SplashActivity.this).setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                                moveTaskToBack(true);
+                            }
+                        });
 
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
-                textView.setText("Please enable the fingerprint permission");
-            }
+                AlertDialog d = builder.create();
+                d.setTitle("Just Verifying It's You");
+                builder.setMessage("Place your finger on the sensor");
+                d.setIcon(R.drawable.baseline_fingerprint_black_18dp);
 
-            if (!fingerprintManager.hasEnrolledFingerprints()) {
-                textView.setText("No fingerprint configured. Please register at least one fingerprint in your device's Settings");
-            }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
-            if (!keyguardManager.isKeyguardSecure()) {
-                textView.setText("Please enable lockscreen security in your device's Settings");
-            } else {
+                    keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+                    fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
 
-                try {
-                    generateKey();
-                } catch (FingerprintException e) {
-                    e.printStackTrace();
+                    if (!fingerprintManager.isHardwareDetected()) {
+                        builder.setMessage("Your device doesn't support fingerprint authentication");
+                    }
+
+                    if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
+                        builder.setMessage("Please enable the fingerprint permission");
+                    }
+
+                    if (!fingerprintManager.hasEnrolledFingerprints()) {
+                        builder.setMessage("No fingerprint configured. Please register at least one fingerprint in your device's Settings");
+                    }
+
+                    if (!keyguardManager.isKeyguardSecure()) {
+                        builder.setMessage("Please enable lockscreen security in your device's Settings");
+                    } else {
+
+                        try {
+                            generateKey();
+                        } catch (FingerprintException e) {
+                            e.printStackTrace();
+                        }
+
+                        if (initCipher()) {
+
+                            cryptoObject = new FingerprintManager.CryptoObject(cipher);
+
+                            FingerprintHandlerTwo helper = new FingerprintHandlerTwo(getApplicationContext());
+                            helper.startAuth(fingerprintManager, cryptoObject);
+
+                        }
+
+                    }
+
                 }
 
-                if (initCipher()) {
-
-                    cryptoObject = new FingerprintManager.CryptoObject(cipher);
-
-                    FingerprintHandlerTwo helper = new FingerprintHandlerTwo(this);
-                    helper.startAuth(fingerprintManager, cryptoObject);
-
-                }
+                d.show();
 
             }
-
-        }
+        }, TIME_OUT);
 
     }
 
@@ -171,17 +209,11 @@ public class AuthenticationActivity extends AppCompatActivity {
     }
 
     public void authenticationComplete() {
-        Intent intent = new Intent(AuthenticationActivity.this, HomeActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
-    }
-
-    private class FingerprintException extends Exception {
-        public FingerprintException(Exception e) {
-            super(e);
-        }
     }
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -246,6 +278,12 @@ public class AuthenticationActivity extends AppCompatActivity {
             authenticationComplete();
         }
 
+    }
+
+    public static class FingerprintException extends Exception {
+        public FingerprintException(Exception e) {
+            super(e);
+        }
     }
 
 }

@@ -4,7 +4,9 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -12,6 +14,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +26,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
@@ -31,6 +35,9 @@ import com.danielkioko.peachnotes.DB.NDb;
 import com.danielkioko.peachnotes.R;
 import com.danielkioko.peachnotes.Setting;
 import com.danielkioko.peachnotes.SharedPref;
+
+import java.util.ArrayList;
+import java.util.Locale;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -77,6 +84,11 @@ public class HomeActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setBackgroundResource(R.color.colorPrimaryDark);
         setSupportActionBar(toolbar);
+
+        TextView textView = findViewById(R.id.paperPenToolbarTitle);
+        AssetManager assetManager = getApplicationContext().getAssets();
+        Typeface typeface = Typeface.createFromAsset(assetManager, String.format(Locale.US, "fonts/%s", "Pacifico.ttf"));
+        textView.setTypeface(typeface);
 
         final DrawerLayout drawer = findViewById(R.id.drawer_layout);
 
@@ -233,6 +245,36 @@ public class HomeActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        if (id == R.id.app_bar_search) {
+
+            final ArrayList<String> listItem = new ArrayList<>();
+
+            MenuItem menuItem = menu.findItem(R.id.app_bar_search);
+            SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+//                    ArrayList<String> notesList = new ArrayList<String>();
+//
+//                    for (String note : listItem) {
+//                        if (note.toLowerCase().contains(newText.toLowerCase())) {
+//                            notesList.add(note);
+//                        }
+//                    }
+//
+//                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(HomeActivity.this, R.layout.list_template, notesList);
+                    return true;
+                }
+            });
+
+        }
+
         //noinspection SimplifiableIfStatement
 //        if (id == R.id.action_profile) {
 //            return true;
@@ -244,13 +286,20 @@ public class HomeActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_notes) {
+        if (id == R.id.app_bar_search) {
 
-        } else if (id == R.id.nav_data) {
-            startActivity(new Intent(HomeActivity.this, Setting.class));
+
+        } else if (id == R.id.nav_notes) {
+            startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+            item.setChecked(true);
+            finish();
+        } else if (id == R.id.nav_settings) {
+            startActivity(new Intent(getApplicationContext(), Setting.class));
+            item.setChecked(true);
         } else if (id == R.id.nav_about) {
 
         }

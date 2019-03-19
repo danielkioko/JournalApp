@@ -36,10 +36,10 @@
 
     </style>
 
-    <!--<style name="windowAnimationTransition" >-->
-    <!--<item name="android:windowEnterTransition">@android:anim/fade_in</item>-->
-    <!--<item name="android:windowExitTransition">@android:anim/fade_out</item>-->
-    <!--</style>-->
+    <style name="windowAnimationTransition">
+        <item name="android:windowEnterTransition">@android:anim/fade_in</item>
+        <item name="android:windowExitTransition">@android:anim/fade_out</item>
+    </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

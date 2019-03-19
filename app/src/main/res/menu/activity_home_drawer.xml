@@ -1,21 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:backgroundTint="#ffffff"
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_notes"
-            android:icon="@drawable/baseline_event_note_black_24dp"
-            android:title="Notes" />
-        <item
-            android:id="@+id/nav_data"
-            android:icon="@drawable/round_data_usage_black_24dp"
-            android:title="Settings" />
+
+        <item android:title="General">
+            <menu>
+                <item
+                    android:id="@+id/app_bar_search"
+                    android:icon="@drawable/ic_search_black_24dp"
+                    android:title="Search" />
+                <item
+                    android:id="@+id/nav_notes"
+                    android:icon="@drawable/baseline_event_note_black_24dp"
+                    android:title="Notes" />
+            </menu>
+        </item>
+
     </group>
 
-    <item android:title="Others">
+    <item android:title="More">
         <menu>
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@drawable/ic_settings_black_24dp"
+                android:title="Settings" />
             <item
                 android:id="@+id/nav_about"
                 android:icon="@drawable/round_info_black_24dp"

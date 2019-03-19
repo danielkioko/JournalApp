@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -26,7 +27,8 @@ public class DisplayNote extends AppCompatActivity {
     private NDb mydb;
     EditText name;
     TextInputEditText content;
-    Button done, delete;
+    Button done;
+    FloatingActionButton delete, send;
     ImageView imageView;
     String dateString;
     int id_To_Update = 0;
@@ -57,6 +59,7 @@ public class DisplayNote extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         quickSave();
+        saveIncomplete();
         return;
     }
 
@@ -78,7 +81,20 @@ public class DisplayNote extends AppCompatActivity {
 
         mydb = new NDb(this);
 
-        delete = findViewById(R.id.btn_delete);
+        send = findViewById(R.id.fab_sendNote);
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String shareBody = content.getText().toString().trim();
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, name.getText().toString());
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                startActivity(Intent.createChooser(sharingIntent, getResources().getString(R.string.share_using)));
+            }
+        });
+
+        delete = findViewById(R.id.fab_delete);
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,10 +142,31 @@ public class DisplayNote extends AppCompatActivity {
                 name.setText(nam);
                 content.setText(contents);
 
-
-
             }
         }
+    }
+
+    public void saveIncomplete() {
+
+        Bundle bundle = getIntent().getExtras();
+        Calendar calendar = Calendar.getInstance();
+        System.out.println("Current time => " + calendar.getTime());
+
+        SimpleDateFormat df = new SimpleDateFormat("MMM, dd");
+        String formattedDate = df.format(calendar.getTime());
+        dateString = formattedDate;
+
+        String untitled = "Untitled: " + dateString;
+
+        if (bundle != null) {
+
+            if (content.getText() != null && name.getText() == null) {
+                mydb.insertNotes(untitled, dateString,
+                        content.getText().toString());
+            }
+
+        }
+
     }
 
     private void saveNote() {

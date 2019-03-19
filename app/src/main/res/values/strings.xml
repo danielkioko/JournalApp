@@ -1,48 +1,13 @@
 <resources>
-    <string name="app_name">Journal App - Peach Notes</string>
+    <string name="app_name">PaperPen</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_intro">IntroActivity</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
-    <string name="tab_text_3">Tab 3</string>
-    <string name="section_format">Hello World from section: %1$d</string>
     <string name="start_writing">Start Writing!</string>
-    <string name="peachicon">peachIcon</string>
-    <string name="peach_notes2">Peach Notes</string>
-    <string name="an_awesome_way_to_write_your_thoughts">An Awesome Way To Write Your Thoughts</string>
-    <string name="by_daniel_k_nzioka">By Daniel K Nzioka</string>
-    <string name="project_for_google_africa_challenge">Project For Google Africa Challenge</string>
-    <string name="sign_out">Sign Out</string>
-    <string name="go_to_guide">Go To Guide</string>
-    <string name="name">Name</string>
-    <string name="email2">Email</string>
-    <string name="password2">Password</string>
-    <string name="confirm_password">Confirm Password</string>
-    <string name="register">Register</string>
-    <string name="already_have_an_account_login">Already Have An Account? Login</string>
-    <string name="welcome_to_peach">Welcome To Peach!</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="login">Login</string>
-    <string name="no_account_yet_sign_up">No Account Yet? Sign Up</string>
-    <string name="peachlogo">peachLogo</string>
-    <string name="peach_notes">Peach Notes</string>
-    <string name="lnam">name</string>
-    <string name="ltim">2/2/2015</string>
-    <string name="fgvgvkjdvmldngvmdngvmrfrfmmgbn">fgvgvkjdvmldngvmdngvmrfrfmmgbn</string>
-    <string name="feathericon">featherIcon</string>
-    <string name="all_secure_you_can_sign_in_by_creating_an_account_or_sign_in_directly_with_google_to_start">All Secure! You can Sign in by creating an account or sign in directly with Google to start</string>
-    <string name="always_have_your_notes_they_ll_always_be_backed_up">Always Have Your Notes! They\'ll Always Be Backed Up</string>
-    <string name="lockicon">lockicon</string>
-    <string name="arrowfornext">arrowForNext</string>
-    <string name="start_writing_notes_just_tap_the_feather_icon_at_mid_bottom_to_begin">Start writing notes! Just tap the feather icon at mid-bottom to begin.</string>
-    <string name="notesicon">notesIcon</string>
-    <string name="servericon">serverIcon</string>
+
     <string name="name_of_note_here">Title</string>
     <string name="your_text_here">Your text here</string>
     <string name="save">SAVE</string>
     <string name="delete">Delete</string>
-    <string name="profile">Profile</string>
+
     <string name="title_activity_home">HomeActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -50,12 +15,6 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_profile">Profile</string>
-
-    <string name="PeachNotes">Fingerprint Authentication</string>
-    <string name="instructions">
-            Place your fingertip on the Home button to verify your identity
-        </string>
-    <string name="title_activity_settings">Settings</string>
 
     <!-- Strings related to Settings -->
 
@@ -83,36 +42,6 @@
 
     <!-- Example settings for Data & Sync -->
     <string name="pref_header_data_sync">Data &amp; sync</string>
-
-    <string name="pref_title_sync_frequency">Sync frequency</string>
-    <string-array name="pref_sync_frequency_titles">
-        <item>15 minutes</item>
-        <item>30 minutes</item>
-        <item>1 hour</item>
-        <item>3 hours</item>
-        <item>6 hours</item>
-        <item>Never</item>
-    </string-array>
-    <string-array name="pref_sync_frequency_values">
-        <item>15</item>
-        <item>30</item>
-        <item>60</item>
-        <item>180</item>
-        <item>360</item>
-        <item>-1</item>
-    </string-array>
-
-    <string-array name="list_preference_entries">
-        <item>Entry 1</item>
-        <item>Entry 2</item>
-        <item>Entry 3</item>
-    </string-array>
-
-    <string-array name="list_preference_entry_values">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
 
     <string-array name="multi_select_list_preference_default_value" />
 
@@ -221,5 +150,11 @@
     <string name="file_created">File Created</string>
     <string name="file_create_error">File Create Error</string>
     <string name="share_using">Share Via:</string>
+    <string name="enable_dark_mode">Enable Dark Mode</string>
+    <string name="general">General</string>
+    <string name="enable_local_backup">Enable Local Backup</string>
+    <string name="your_notes_will_be_backed_up_daily">Your notes will be backed up daily</string>
+    <string name="data">Data</string>
+    <string name="require_fingerprint_unlock">Require Fingerprint Unlock</string>
 
 </resources>

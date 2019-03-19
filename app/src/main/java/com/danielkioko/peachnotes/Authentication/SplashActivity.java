@@ -97,8 +97,8 @@ public class SplashActivity extends AppCompatActivity {
 
                     AlertDialog d = builder.create();
                     d.setTitle("Just Verifying It's You");
-                    builder.setMessage("Place your finger on the sensor");
-                    d.setIcon(R.drawable.baseline_fingerprint_black_18dp);
+                    builder.setTitle("Place your finger on the sensor");
+                    d.setIcon(R.drawable.ic_fingerprint_black_24dp);
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 

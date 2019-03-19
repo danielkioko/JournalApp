@@ -73,6 +73,7 @@
                             android:fontFamily="sans-serif-light"
                             android:gravity="top|start"
                             android:hint="@string/your_text_here"
+                            android:text="@string/large_text"
                             android:inputType="textMultiLine"
                             android:lineSpacingExtra="4sp"
                             android:padding="15dp"
@@ -163,6 +164,7 @@
                             app:layout_constraintBottom_toBottomOf="@+id/fab_delete"
                             app:layout_constraintStart_toEndOf="@+id/fab_delete"
                             app:layout_constraintTop_toTopOf="@+id/fab_delete"
+                            android:focusable="true"
                             app:srcCompat="@drawable/ic_share_black_24dp" />
 
                     </android.support.constraint.ConstraintLayout>

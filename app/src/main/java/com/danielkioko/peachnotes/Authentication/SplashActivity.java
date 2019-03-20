@@ -26,6 +26,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.danielkioko.peachnotes.Dialog.CustomDialogClass;
 import com.danielkioko.peachnotes.Notes.HomeActivity;
 import com.danielkioko.peachnotes.R;
 import com.danielkioko.peachnotes.SettingsAndPreferences.SecurityPref;
@@ -72,7 +73,6 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         securityPref = new SecurityPref(this);
-
         textView = findViewById(R.id.tvPaperPen);
 
         AssetManager assetManager = getApplicationContext().getAssets();
@@ -86,6 +86,8 @@ public class SplashActivity extends AppCompatActivity {
                 @Override
                 public void run() {
 
+                    CustomDialogClass customDialogClass = new CustomDialogClass(SplashActivity.this);
+
                     AlertDialog.Builder builder = new AlertDialog.Builder(SplashActivity.this).setNegativeButton("Cancel",
                             new DialogInterface.OnClickListener() {
                                 @Override
@@ -95,30 +97,29 @@ public class SplashActivity extends AppCompatActivity {
                                 }
                             });
 
-                    AlertDialog d = builder.create();
-                    d.setTitle("Just Verifying It's You");
-                    builder.setTitle("Place your finger on the sensor");
-                    d.setIcon(R.drawable.ic_fingerprint_black_24dp);
-
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
                         keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
                         fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
 
                         if (!fingerprintManager.isHardwareDetected()) {
-                            d.setTitle("Your device doesn't support fingerprint authentication");
+                            Toast.makeText(getApplicationContext(), "Your device doesn't support fingerprint authentication", Toast.LENGTH_LONG).show();
+                            //d.setTitle("Your device doesn't support fingerprint authenticat1ion");
                         }
 
                         if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
-                            d.setTitle("Please enable the fingerprint permission");
+                            Toast.makeText(getApplicationContext(), "Please enable the fingerprint permission", Toast.LENGTH_LONG).show();
+                            //d.setTitle("Please enable the fingerprint permission");
                         }
 
                         if (!fingerprintManager.hasEnrolledFingerprints()) {
-                            d.setTitle("No fingerprint configured. Please register at least one fingerprint in your device's Settings");
+                            Toast.makeText(getApplicationContext(), "No fingerprint configured. Please register at least one fingerprint in your device's Settings", Toast.LENGTH_LONG).show();
+                            //d.setTitle("No fingerprint configured. Please register at least one fingerprint in your device's Settings");
                         }
 
                         if (!keyguardManager.isKeyguardSecure()) {
-                            d.setTitle("Please enable lockscreen security in your device's Settings");
+                            Toast.makeText(getApplicationContext(), "Please enable lockscreen security in your device's Settings", Toast.LENGTH_LONG).show();
+                            //d.setTitle("Please enable lockscreen security in your device's Settings");
                         } else {
 
                             try {
@@ -140,7 +141,7 @@ public class SplashActivity extends AppCompatActivity {
 
                     }
 
-                    d.show();
+                    customDialogClass.show();
 
                 }
             }, TIME_OUT);

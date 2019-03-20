@@ -45,6 +45,7 @@
                 android:layout_marginBottom="8dp"
                 android:text="2541 North Av."
                 android:textColor="?attr/textColor"
+                android:transitionName="@string/transitioned_name"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

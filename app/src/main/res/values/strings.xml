@@ -156,5 +156,7 @@
     <string name="your_notes_will_be_backed_up_daily">Your notes will be backed up daily</string>
     <string name="data">Data</string>
     <string name="require_fingerprint_unlock">Require Fingerprint Unlock</string>
+    <string name="search">Search</string>
+    <string name="transitioned_name">tr_name</string>
 
 </resources>

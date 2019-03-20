@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Fade;
+import android.transition.Slide;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -66,6 +68,7 @@ public class DisplayNote extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setUpWindowTransitions();
         setContentView(R.layout.viewnotepad);
 
         name = findViewById(R.id.txtname);
@@ -98,6 +101,7 @@ public class DisplayNote extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(DisplayNote.this);
                 builder.setMessage("Delete Note?")
                         .setPositiveButton("YES",
@@ -146,6 +150,17 @@ public class DisplayNote extends AppCompatActivity {
         }
     }
 
+
+    private void setUpWindowTransitions() {
+        Fade fade = new Fade();
+        fade.setDuration(3000);
+        this.getWindow().setEnterTransition(fade);
+
+        Slide slide = new Slide();
+        slide.setDuration(3000);
+        this.getWindow().setReturnTransition(slide);
+    }
+
     public void saveIncomplete() {
 
         Bundle bundle = getIntent().getExtras();
@@ -183,7 +198,10 @@ public class DisplayNote extends AppCompatActivity {
             if (Value > 0) {
                 if (content.getText().toString().trim().equals("")
                         || name.getText().toString().trim().equals("")) {
-                    Toast.makeText(this, "Please fill in name of the note", Toast.LENGTH_LONG).show();
+
+                    name.setText("untitled");
+                    saveNote();
+                    //Toast.makeText(this, "Please fill in name of the note", Toast.LENGTH_LONG).show();
                 } else {
                     if (mydb.updateNotes(id_To_Update, name.getText()
                             .toString(), dateString, content.getText()
@@ -193,7 +211,7 @@ public class DisplayNote extends AppCompatActivity {
                                 HomeActivity.class);
                         startActivity(intent);
                         finish();
-                        //Toast.makeText(this, "Your note Updated Successfully!!!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "Your note Updated Successfully!!!", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(this, "There's an error. That's all I can tell. Sorry!", Toast.LENGTH_LONG).show();
                     }
@@ -201,7 +219,9 @@ public class DisplayNote extends AppCompatActivity {
             } else {
                 if (content.getText().toString().trim().equals("")
                         || name.getText().toString().trim().equals("")) {
-                    Toast.makeText(this, "Please fill in name of the note", Toast.LENGTH_LONG).show();
+                    name.setText("untitled");
+                    saveNote();
+                    //Toast.makeText(this, "Please fill in name of the note", Toast.LENGTH_LONG).show();
                 } else {
                     if (mydb.insertNotes(name.getText().toString(), dateString,
                             content.getText().toString())) {

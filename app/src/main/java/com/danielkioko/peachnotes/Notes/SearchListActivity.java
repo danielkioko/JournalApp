@@ -39,13 +39,19 @@ public class SearchListActivity extends AppCompatActivity {
         etSearch = findViewById(R.id.editTextListSearch);
 
         Cursor c = db.fetchAllData();
-        String[] fieldNames = new String[]{NDb.name, NDb._id, NDb.dates, NDb.remark};
-        int[] display = new int[]{R.id.txtnamerow, R.id.txtidrow,
-                R.id.txtdate};
+
+        String[] fieldNames = new String[]{
+                NDb.name, NDb._id, NDb.dates, NDb.remark
+        };
+
+        int[] display = new int[]{
+                R.id.txtnamerow, R.id.txtidrow,
+                R.id.txtdate
+        };
+
         adapter = new SimpleCursorAdapter(this, R.layout.list_template, c, fieldNames,
                 display, 0);
         listView.setAdapter(adapter);
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,

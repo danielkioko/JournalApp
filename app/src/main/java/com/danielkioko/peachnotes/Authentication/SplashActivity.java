@@ -104,22 +104,26 @@ public class SplashActivity extends AppCompatActivity {
 
                         if (!fingerprintManager.isHardwareDetected()) {
                             Toast.makeText(getApplicationContext(), "Your device doesn't support fingerprint authentication", Toast.LENGTH_LONG).show();
+                            builder.setMessage("Your device doesn't support fingerprint authentication");
                             //d.setTitle("Your device doesn't support fingerprint authenticat1ion");
                         }
 
                         if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
                             Toast.makeText(getApplicationContext(), "Please enable the fingerprint permission", Toast.LENGTH_LONG).show();
                             //d.setTitle("Please enable the fingerprint permission");
+                            builder.setMessage("Please enable the fingerprint permission");
                         }
 
                         if (!fingerprintManager.hasEnrolledFingerprints()) {
                             Toast.makeText(getApplicationContext(), "No fingerprint configured. Please register at least one fingerprint in your device's Settings", Toast.LENGTH_LONG).show();
                             //d.setTitle("No fingerprint configured. Please register at least one fingerprint in your device's Settings");
+                            builder.setMessage("No fingerprint configured. Please register at least one fingerprint in your device's Settings");
                         }
 
                         if (!keyguardManager.isKeyguardSecure()) {
                             Toast.makeText(getApplicationContext(), "Please enable lockscreen security in your device's Settings", Toast.LENGTH_LONG).show();
                             //d.setTitle("Please enable lockscreen security in your device's Settings");
+                            builder.setMessage("Please enable lockscreen security in your device's Settings");
                         } else {
 
                             try {
@@ -129,9 +133,7 @@ public class SplashActivity extends AppCompatActivity {
                             }
 
                             if (initCipher()) {
-
                                 cryptoObject = new FingerprintManager.CryptoObject(cipher);
-
                                 FingerprintHandlerTwo helper = new FingerprintHandlerTwo(getApplicationContext());
                                 helper.startAuth(fingerprintManager, cryptoObject);
 

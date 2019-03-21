@@ -1,137 +1,75 @@
 package com.danielkioko.peachnotes.Notes;
 
 import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.NonNull;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
-
-import com.danielkioko.peachnotes.R;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 public class ListAdapter extends ArrayAdapter<Note> {
 
-    public ArrayList<Note> MainList;
+    //define static variable
+    public static String dbname = "MyNotes.db";
+    public static String mynotes = "mynotes";
+    //establish connection with SQLiteDataBase
+    private final Context c;
+    private DatabaseHelper dbHelper;
+    private SQLiteDatabase sqlDb;
 
-    public ArrayList<Note> noteListTemp;
-
-    public List<Note> nList = null;
-
-    // public ListAdapter.SubjectDataFilter noteDataFilter;
-
-    public ListAdapter(Context context, int id, ArrayList<Note> studentArrayList) {
-        super(context, id, studentArrayList);
-
-        this.noteListTemp = new ArrayList<Note>();
-        this.noteListTemp.addAll(studentArrayList);
-        this.MainList = new ArrayList<Note>();
-        this.MainList.addAll(studentArrayList);
+    public ListAdapter(@NonNull Context context, int resource) {
+        super(context, resource);
+        this.c = context;
     }
 
-//    @Override
-//    public Filter getFilter() {
-//        if (noteDataFilter == null) {
-//            noteDataFilter = new ListAdapter.SubjectDataFilter();
-//        }
-//        return noteDataFilter;
-//    }
+    public ListAdapter open() throws SQLException {
+        dbHelper = new DatabaseHelper(c);
+        sqlDb = dbHelper.getWritableDatabase();
+        return this;
+    }
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ListAdapter.ViewHolder holder = null;
+    //fetch data
+    public Cursor fetchAllData() {
+        String query = "SELECT * FROM " + mynotes;
+        Cursor row = sqlDb.rawQuery(query, null);
+        if (row != null) {
+            row.moveToFirst();
+        }
+        return row;
+    }
 
-        if (convertView == null) {
-
-            LayoutInflater layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.search_list_template, null);
-
-            holder = new ListAdapter.ViewHolder();
-            holder.theTitle = convertView.findViewById(R.id.tvFileName);
-            holder.theDate = convertView.findViewById(R.id.tvFileSaveDate);
-
-            convertView.setTag(holder);
-
+    //fetch data by filter
+    public Cursor fetchdatabyfilter(String inputText, String filtercolumn) throws SQLException {
+        Cursor row = null;
+        String query = "SELECT * FROM " + mynotes;
+        if (inputText == null || inputText.length() == 0) {
+            row = sqlDb.rawQuery(query, null);
         } else {
+            query = "SELECT * FROM " + mynotes + " WHERE " + filtercolumn + " like '%" + inputText + "%'";
+            row = sqlDb.rawQuery(query, null);
+        }
+        if (row != null) {
+            row.moveToFirst();
+        }
+        return row;
+    }
 
-            holder = (ListAdapter.ViewHolder) convertView.getTag();
+    private static class DatabaseHelper extends SQLiteOpenHelper {
+        public DatabaseHelper(Context context) {
+            super(context, dbname, null, 1);
         }
 
-        Note note = noteListTemp.get(position);
-        holder.theTitle.setText(note.getTitle());
-        holder.theDate.setText(note.getDate());
-
-        return convertView;
-    }
-
-    public void filter(String charText) {
-        charText = charText.toLowerCase(Locale.getDefault());
-        MainList.clear();
-        if (charText.length() == 0) {
-            noteListTemp.addAll(MainList);
-        } else {
-            for (Note n : MainList) {
-                if (n.getTitle().toLowerCase(Locale.getDefault()).contains(charText)) {
-                    MainList.add(n);
-                }
-            }
+        @Override
+        public void onCreate(SQLiteDatabase db) {
+            // db.execSQL("CREATE TABLE IF NOT EXISTS "+mynotes+" (_id integer primary key, name, remark, date)");
         }
-        notifyDataSetChanged();
+
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+//            db.execSQL("DROP TABLE IF EXISTS "+mynotes);
+//            onCreate(db);
+        }
     }
 
-    public class ViewHolder {
-        TextView theTitle;
-        TextView theDate;
-    }
-
-//    private class SubjectDataFilter extends Filter {
-//
-//        @Override
-//        protected FilterResults performFiltering(CharSequence charSequence) {
-//
-//            charSequence = charSequence.toString().toLowerCase();
-//            FilterResults filterResults = new FilterResults();
-//
-//            if (charSequence != null && charSequence.toString().length() > 0) {
-//                ArrayList<Note> arrayList1 = new ArrayList<Note>();
-//
-//                for (int i = 0, l = MainList.size(); i < l; i++) {
-//                    Note subject = MainList.get(i);
-//
-//                    if (subject.toString().toLowerCase().contains(charSequence))
-//
-//                        arrayList1.add(subject);
-//                }
-//                filterResults.count = arrayList1.size();
-//                filterResults.values = arrayList1;
-//
-//            } else {
-//                synchronized (this) {
-//                    filterResults.values = MainList;
-//
-//                    filterResults.count = MainList.size();
-//                }
-//            }
-//            return filterResults;
-//        }
-//
-//        @SuppressWarnings("unchecked")
-//        @Override
-//        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-//
-//            noteListTemp = (ArrayList<Note>) filterResults.values;
-//            notifyDataSetChanged();
-//
-//            clear();
-//
-//            for (int i = 0, l = noteListTemp.size(); i < l; i++)
-//                add(noteListTemp.get(i));
-//
-//            notifyDataSetInvalidated();
-//        }
-//
-//    }
 }

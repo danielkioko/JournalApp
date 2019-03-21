@@ -9,14 +9,20 @@
         android:id="@+id/editTextListSearch"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:fontFamily="sans-serif-light"
+        android:maxLines="1"
         android:gravity="center"
         android:hint="Search Here"
-        android:maxLines="1" />
+        android:padding="15dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@color/lynxWhite" />
 
     <ListView
         android:id="@+id/searchListView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/editTextListSearch" />
+        android:layout_below="@+id/editTextListSearch"
+        android:layout_marginTop="0dp" />
 
 </RelativeLayout>

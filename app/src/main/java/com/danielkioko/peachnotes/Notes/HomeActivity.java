@@ -213,38 +213,6 @@ public class HomeActivity extends AppCompatActivity
 
     }
 
-//    public void searchItem() {
-//
-//        ArrayList<String> listItem = new ArrayList<>();
-//
-//        MenuItem menuItem = menu.findItem(R.id.app_bar_search);
-//        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
-//
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                ArrayList<String> notesList = new ArrayList<String>();
-//
-//                for (String note : notesList) {
-//                    if (note.toLowerCase().contains(newText.toLowerCase())) {
-//                        notesList.add(note);
-//                    }
-//                }
-//
-//                ArrayAdapter<String> adapter = new ArrayAdapter<String>(HomeActivity.this, R.layout.list_template, notesList);
-//
-//                notesList.set(adapter);
-//
-//
-//            }
-//        }
-//    }
-
     @Override
     protected void onStart() {
         super.onStart();

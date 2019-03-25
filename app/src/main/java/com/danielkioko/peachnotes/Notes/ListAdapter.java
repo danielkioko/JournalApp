@@ -62,13 +62,10 @@ public class ListAdapter extends ArrayAdapter<Note> {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            // db.execSQL("CREATE TABLE IF NOT EXISTS "+mynotes+" (_id integer primary key, name, remark, date)");
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-//            db.execSQL("DROP TABLE IF EXISTS "+mynotes);
-//            onCreate(db);
         }
     }
 

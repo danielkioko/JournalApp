@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 import com.danielkioko.peachnotes.DB.NDb;
 import com.danielkioko.peachnotes.R;
+import com.danielkioko.peachnotes.SettingsAndPreferences.SharedPref;
 
 public class SearchListActivity extends AppCompatActivity {
 
@@ -27,9 +29,24 @@ public class SearchListActivity extends AppCompatActivity {
     ListAdapter db;
     SimpleCursorAdapter adapter;
 
+    SharedPref sharedPref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        sharedPref = new SharedPref(this);
+
+        if (sharedPref.loadNightModeState()) {
+            setTheme(R.style.DarkAppTheme_NoActionBar);
+            AppCompatDelegate.setDefaultNightMode(
+                    AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            setTheme(R.style.AppTheme_NoActionBar);
+            AppCompatDelegate.setDefaultNightMode(
+                    AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
         setContentView(R.layout.activity_search_list);
 
         db = new ListAdapter(SearchListActivity.this, 1);

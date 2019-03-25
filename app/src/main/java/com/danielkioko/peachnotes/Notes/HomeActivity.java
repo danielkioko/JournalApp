@@ -1,7 +1,6 @@
 package com.danielkioko.peachnotes.Notes;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -12,7 +11,6 @@ import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -46,14 +44,6 @@ public class HomeActivity extends AppCompatActivity
     CoordinatorLayout coordinatorLayout;
     SimpleCursorAdapter adapter;
     private int id_to_update = 0;
-
-    Menu menu;
-    AlertDialog.Builder alertDialogBuilder;
-    AlertDialog alertDialog;
-
-    Context context = this;
-    Snackbar snackbar;
-    private ListView obj;
 
     SharedPref sharedPref;
     Backup backup;
@@ -261,14 +251,11 @@ public class HomeActivity extends AppCompatActivity
 
         if (id == R.id.app_bar_search) {
             startActivity(new Intent(getApplicationContext(), SearchListActivity.class));
-            item.setChecked(true);
         } else if (id == R.id.nav_notes) {
             startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-            item.setChecked(true);
             finish();
         } else if (id == R.id.nav_settings) {
             startActivity(new Intent(getApplicationContext(), Setting.class));
-            item.setChecked(true);
         } else if (id == R.id.nav_about) {
 
         }

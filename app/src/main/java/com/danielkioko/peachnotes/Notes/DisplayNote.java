@@ -8,11 +8,16 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.transition.Fade;
 import android.transition.Slide;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -34,8 +39,6 @@ public class DisplayNote extends AppCompatActivity {
     ImageView imageView;
     String dateString;
     int id_To_Update = 0;
-
-    int PICK_IMAGE = 1;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -68,11 +71,35 @@ public class DisplayNote extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setUpWindowTransitions();
+//        if (Build.VERSION.SDK_INT >= 21)
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         setContentView(R.layout.viewnotepad);
 
         name = findViewById(R.id.txtname);
         content = findViewById(R.id.txtcontent);
+
+        Transition transition = TransitionInflater
+                .from(this)
+//                .inflateTransition(R.transition.explode);
+//                .inflateTransition(R.transition.fade);
+                .inflateTransition(R.transition.activity_slide);
+
+        DisplayNote.this.getWindow().setExitTransition(transition);
+        DisplayNote.this.getWindow().setEnterTransition(transition);
+
+        content.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
 
         done = findViewById(R.id.btn_done);
         done.setOnClickListener(new View.OnClickListener() {

@@ -13,15 +13,12 @@
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:fullBackupContent="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:supportsRtl="true">
 
-        <activity android:name=".Notes.SearchListActivity">
-
-        </activity>
+        <activity android:name=".Notes.SearchListActivity" />
 
         <meta-data
             android:name="com.google.android.geo.version"
@@ -47,7 +44,7 @@
 
         <activity
             android:name=".Intro.IntroActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SettingsAndPreferences.Setting"
             android:screenOrientation="portrait"

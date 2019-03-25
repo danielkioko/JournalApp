@@ -1,15 +1,20 @@
 package com.danielkioko.peachnotes.SettingsAndPreferences;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.widget.Toolbar;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.danielkioko.peachnotes.Notes.HomeActivity;
 import com.danielkioko.peachnotes.R;
+
+import java.util.Locale;
 
 public class Setting extends AppCompatActivity {
 
@@ -21,19 +26,24 @@ public class Setting extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
-        final DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        Toolbar toolbar = findViewById(R.id.toolbar_settings);
+        setSupportActionBar(toolbar);
+
+        TextView textView = findViewById(R.id.paperPenToolbarTitleInSettings);
+        AssetManager assetManager = getApplicationContext().getAssets();
+        Typeface typeface = Typeface.createFromAsset(assetManager, String.format(Locale.US, "fonts/%s", "Pacifico.ttf"));
+        textView.setTypeface(typeface);
 
         sharedPref = new SharedPref(this);
         securityPref = new SecurityPref(this);
 
-        if (sharedPref.loadNightModeState() == true) {
+        if (sharedPref.loadNightModeState()) {
             setTheme(R.style.DarkAppTheme_NoActionBar);
-            AppCompatDelegate.setDefaultNightMode(
-                    AppCompatDelegate.MODE_NIGHT_YES);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         } else {
             setTheme(R.style.AppTheme_NoActionBar);
-            AppCompatDelegate.setDefaultNightMode(
-                    AppCompatDelegate.MODE_NIGHT_NO);
+            AppCompatDelegate.setDefaultNightMode
+                    (AppCompatDelegate.MODE_NIGHT_NO);
         }
 
         Switch aSwitch = findViewById(R.id.switch_dark_mode);
@@ -47,7 +57,6 @@ public class Setting extends AppCompatActivity {
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
                 if (isChecked) {
                     sharedPref.setNightModeState(true);
                     restartApp();
@@ -55,7 +64,6 @@ public class Setting extends AppCompatActivity {
                     sharedPref.setNightModeState(false);
                     restartApp();
                 }
-
             }
         });
 
@@ -87,13 +95,11 @@ public class Setting extends AppCompatActivity {
         cSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
                 if (isChecked) {
                     securityPref.setLockPrefState(true);
                 } else {
                     securityPref.setLockPrefState(false);
                 }
-
             }
         });
 

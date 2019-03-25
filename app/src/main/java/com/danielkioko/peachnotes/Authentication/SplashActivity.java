@@ -268,10 +268,8 @@ public class SplashActivity extends AppCompatActivity {
         //onAuthenticationError is called when a fatal error has occurred. It provides the error code and error message as its parameters//
 
         public void onAuthenticationError(int errMsgId, CharSequence errString) {
-
             //I’m going to display the results of fingerprint authentication as a series of toasts.
             //Here, I’m creating the message that’ll be displayed if an error occurs//
-
             Toast.makeText(context, "Authentication error\n" + errString, Toast.LENGTH_LONG).show();
         }
 

@@ -151,9 +151,12 @@ public class HomeActivity extends AppCompatActivity
                         cardView.getChildAt(0);
 
                 final TextView m = (TextView) constraintLayoutChild.getChildAt(1);
+
                 final Bundle dataBundle = new Bundle();
-                final int Value = dataBundle.getInt("id");
-                id_to_update = Value;
+                dataBundle.putInt("id", Integer.parseInt(m.getText().toString()));
+                final Intent intent = getIntent();
+                intent.putExtras(dataBundle);
+                //startActivity(intent);
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
                 builder.setMessage("Options")
@@ -168,8 +171,11 @@ public class HomeActivity extends AppCompatActivity
                                                         new DialogInterface.OnClickListener() {
                                                             @Override
                                                             public void onClick(DialogInterface dialog, int which) {
+                                                                int Value = dataBundle.getInt("id");
                                                                 id_to_update = Value;
                                                                 mydb.deleteNotes(id_to_update);
+                                                                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                                                                finish();
                                                             }
                                                         });
 

@@ -65,6 +65,17 @@ public class ADb extends SQLiteOpenHelper {
         return z;
     }
 
+    public boolean updateIfTaskDone(Integer id, String is_done) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("is_done", is_done);
+
+        db.update(mytasks, contentValues, "_id = ? ",
+                new String[]{Integer.toString(id)});
+        return true;
+
+    }
+
     public boolean updateTask(Integer id, String task, String is_done,
                               String date) {
         SQLiteDatabase db = this.getWritableDatabase();

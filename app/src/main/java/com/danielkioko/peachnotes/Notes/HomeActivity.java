@@ -156,7 +156,7 @@ public class HomeActivity extends AppCompatActivity
                 dataBundle.putInt("id", Integer.parseInt(m.getText().toString()));
                 final Intent intent = getIntent();
                 intent.putExtras(dataBundle);
-                //startActivity(intent);
+                startActivity(intent);
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
                 builder.setMessage("Options")

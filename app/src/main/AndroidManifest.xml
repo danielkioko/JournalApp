@@ -18,20 +18,20 @@
         android:label="@string/app_name"
         android:supportsRtl="true">
         <service
-            android:name=".ToneService"
+            android:name=".Reminders.ToneService"
             android:enabled="true"
             android:exported="true"></service>
 
         <receiver
-            android:name=".AlarmReceiver"
+            android:name=".Reminders.AlarmReceiver"
             android:enabled="true"
             android:exported="true" />
 
         <activity
-            android:name=".NewRemiderActivity"
+            android:name=".Reminders.NewRemiderActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ReminderActivity"
+            android:name=".Reminders.ReminderActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

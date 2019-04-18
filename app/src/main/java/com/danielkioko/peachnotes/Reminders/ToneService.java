@@ -1,4 +1,4 @@
-package com.danielkioko.peachnotes;
+package com.danielkioko.peachnotes.Reminders;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -12,6 +12,8 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
+
+import com.danielkioko.peachnotes.R;
 
 import java.util.Random;
 

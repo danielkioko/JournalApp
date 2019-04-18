@@ -1,4 +1,4 @@
-package com.danielkioko.peachnotes;
+package com.danielkioko.peachnotes.Reminders;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

@@ -8,8 +8,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.transition.Fade;
 import android.transition.Slide;
 import android.transition.Transition;
@@ -87,20 +85,6 @@ public class DisplayNote extends AppCompatActivity {
         DisplayNote.this.getWindow().setExitTransition(transition);
         DisplayNote.this.getWindow().setEnterTransition(transition);
 
-        content.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-
         done = findViewById(R.id.btn_done);
         done.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,7 +160,6 @@ public class DisplayNote extends AppCompatActivity {
             }
         }
     }
-
 
     private void setUpWindowTransitions() {
         Fade fade = new Fade();

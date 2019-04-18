@@ -104,7 +104,6 @@ public class HomeActivity extends AppCompatActivity
                         DisplayNote.class);
                 intent.putExtras(dataBundle);
                 startActivity(intent);
-                finish();
             }
         });
 

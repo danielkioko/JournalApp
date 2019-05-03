@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,25 +8,36 @@
 
     <EditText
         android:id="@+id/editTextListSearch"
-        android:layout_width="fill_parent"
-        android:layout_height="60dp"
-        android:background="@color/colorAccent"
+        android:layout_width="344dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/et_background"
         android:fontFamily="sans-serif-light"
-        android:maxLines="1"
-        android:maxLength="10"
         android:gravity="center"
         android:hint="Search Here"
+        android:maxLength="10"
+        android:maxLines="1"
         android:padding="10dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="#ffffff"
         android:textColorHint="@color/lynxWhite"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
         android:id="@+id/searchListView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_below="@+id/editTextListSearch"
-        android:layout_marginTop="0dp" />
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/editTextListSearch"
+        app:layout_constraintStart_toStartOf="@+id/editTextListSearch"
+        app:layout_constraintTop_toBottomOf="@+id/editTextListSearch" />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

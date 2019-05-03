@@ -8,12 +8,9 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
-import android.transition.Fade;
-import android.transition.Slide;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -37,34 +34,6 @@ public class DisplayNote extends AppCompatActivity {
     ImageView imageView;
     String dateString;
     int id_To_Update = 0;
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            int value = extras.getInt("id");
-            getMenuInflater().inflate(R.menu.display_menu, menu);
-        }
-        return true;
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        super.onOptionsItemSelected(item);
-        switch (item.getItemId()) {
-//            case R.id.Delete:
-//
-//                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        quickSave();
-        saveIncomplete();
-        return;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +89,7 @@ public class DisplayNote extends AppCompatActivity {
                                     public void onClick(DialogInterface dialog,
                                                         int id) {
                                         mydb.deleteNotes(id_To_Update);
-                                        Toast.makeText(DisplayNote.this, "Deleted Successfully", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(DisplayNote.this, "Note Deleted", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(
                                                 getApplicationContext(),
                                                 HomeActivity.class);
@@ -161,16 +130,6 @@ public class DisplayNote extends AppCompatActivity {
         }
     }
 
-    private void setUpWindowTransitions() {
-        Fade fade = new Fade();
-        fade.setDuration(3000);
-        this.getWindow().setEnterTransition(fade);
-
-        Slide slide = new Slide();
-        slide.setDuration(3000);
-        this.getWindow().setReturnTransition(slide);
-    }
-
     public void saveIncomplete() {
 
         Bundle bundle = getIntent().getExtras();
@@ -206,111 +165,94 @@ public class DisplayNote extends AppCompatActivity {
         if (extras != null) {
             int Value = extras.getInt("id");
             if (Value > 0) {
-                if (content.getText().toString().trim().equals("")
-                        || name.getText().toString().trim().equals("")) {
 
-                    name.setText("untitled");
-                    saveNote();
+                if (name.getText().toString().trim().equals("") &&
+                        content.getText().toString().trim().equals("")) {
+                    mydb.deleteNotes(id_To_Update);
+                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                }
+
+                if (!name.getText().toString().trim().equals("") &&
+                        content.getText().toString().trim().equals("")) {
+                    if (mydb.insertNotes(name.getText().toString(), dateString,
+                            content.getText().toString())) {
+                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                    }
+                }
+
+                if (name.getText().toString().trim().equals("") &&
+                        !content.getText().toString().trim().equals("")) {
+                    if (mydb.insertNotes("Untitled", dateString,
+                            content.getText().toString())) {
+                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                    }
                     //Toast.makeText(this, "Please fill in name of the note", Toast.LENGTH_LONG).show();
                 } else {
-                    if (mydb.updateNotes(id_To_Update, name.getText()
-                            .toString(), dateString, content.getText()
-                            .toString())) {
-                        Intent intent = new Intent(
-                                getApplicationContext(),
-                                HomeActivity.class);
-                        startActivity(intent);
-                        finish();
-                        Toast.makeText(this, "Your note Updated Successfully!!!", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(this, "There's an error. That's all I can tell. Sorry!", Toast.LENGTH_LONG).show();
+                    if (!name.getText().toString().trim().equals("") &&
+                            !content.getText().toString().trim().equals("")) {
+                        if (mydb.updateNotes(id_To_Update, name.getText()
+                                .toString(), dateString, content.getText()
+                                .toString())) {
+                            startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                        } else {
+                            Toast.makeText(this, "There's an error. That's all I can tell. Sorry!", Toast.LENGTH_LONG).show();
+                        }
                     }
                 }
             } else {
-                if (content.getText().toString().trim().equals("")
-                        || name.getText().toString().trim().equals("")) {
-                    name.setText("untitled");
-                    saveNote();
-                    //Toast.makeText(this, "Please fill in name of the note", Toast.LENGTH_LONG).show();
-                } else {
+
+                if (name.getText().toString().trim().equals("") &&
+                        content.getText().toString().trim().equals("")) {
+                    mydb.deleteNotes(id_To_Update);
+                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                }
+
+                if (!name.getText().toString().trim().equals("") &&
+                        content.getText().toString().trim().equals("")) {
                     if (mydb.insertNotes(name.getText().toString(), dateString,
                             content.getText().toString())) {
-                        Intent intent = new Intent(
-                                getApplicationContext(),
-                                HomeActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                        finish();
-                        Toast.makeText(this, "Added Successfully.", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(this, "Unfortunately Task Failed.", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                    }
+                }
+
+                if (name.getText().toString().trim().equals("") &&
+                        !content.getText().toString().trim().equals("")) {
+                    if (mydb.insertNotes("Untitled", dateString,
+                            content.getText().toString())) {
+                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                    }
+                } else {
+
+                    if (!name.getText().toString().trim().equals("") &&
+                            !content.getText().toString().trim().equals("")) {
+                        if (mydb.insertNotes(name.getText().toString(), dateString,
+                                content.getText().toString())) {
+                            startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                            //Toast.makeText(this, "Added Successfully.", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(this, "There's an error. That's all I can tell. Sorry!", Toast.LENGTH_LONG).show();
+                        }
                     }
                 }
             }
         }
     }
 
-    private void quickSave() {
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
         Bundle extras = getIntent().getExtras();
-        Calendar c = Calendar.getInstance();
-        System.out.println("Current time => " + c.getTime());
-        SimpleDateFormat df = new SimpleDateFormat("MMM, dd");
-        String formattedDate = df.format(c.getTime());
-        dateString = formattedDate;
-
         if (extras != null) {
-            int Value = extras.getInt("id");
-            if (Value > 0) {
-                if (content.getText().toString().trim().equals("")
-                        || name.getText().toString().trim().equals("")) {
-
-                    mydb.deleteNotes(id_To_Update);
-                    Intent intent = new Intent(
-                            getApplicationContext(),
-                            HomeActivity.class);
-                    startActivity(intent);
-                    finish();
-
-                } else {
-                    if (mydb.updateNotes(id_To_Update, name.getText()
-                            .toString(), dateString, content.getText()
-                            .toString())) {
-                        Intent intent = new Intent(
-                                getApplicationContext(),
-                                HomeActivity.class);
-                        startActivity(intent);
-                        finish();
-                        //Toast.makeText(this, "Your note Updated Successfully!!!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(this, "There's an error. That's all I can tell. Sorry!", Toast.LENGTH_LONG).show();
-                    }
-                }
-            } else {
-                if (content.getText().toString().trim().equals("")
-                        || name.getText().toString().trim().equals("")) {
-
-                    mydb.deleteNotes(id_To_Update);
-                    Intent intent = new Intent(
-                            getApplicationContext(),
-                            HomeActivity.class);
-                    startActivity(intent);
-                    finish();
-
-                } else {
-                    if (mydb.insertNotes(name.getText().toString(), dateString,
-                            content.getText().toString())) {
-                        Intent intent = new Intent(
-                                getApplicationContext(),
-                                HomeActivity.class);
-                        startActivity(intent);
-                        finish();
-                        Toast.makeText(this, "Added Successfully.", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(this, "Unfortunately Task Failed.", Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
+            int value = extras.getInt("id");
+            getMenuInflater().inflate(R.menu.display_menu, menu);
         }
+        return true;
     }
+
+    @Override
+    public void onBackPressed() {
+        saveNote();
+        return;
+    }
+
 }

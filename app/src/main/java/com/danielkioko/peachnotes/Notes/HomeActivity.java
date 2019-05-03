@@ -1,6 +1,8 @@
 package com.danielkioko.peachnotes.Notes;
 
+import android.app.ActivityManager;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -32,6 +34,7 @@ import com.danielkioko.peachnotes.R;
 import com.danielkioko.peachnotes.SettingsAndPreferences.Setting;
 import com.danielkioko.peachnotes.SettingsAndPreferences.SharedPref;
 
+import java.util.List;
 import java.util.Locale;
 
 public class HomeActivity extends AppCompatActivity
@@ -88,9 +91,6 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        View headerView = navigationView.getHeaderView(0);
-
-        coordinatorLayout = findViewById(R.id.coordinatorLayout);
         mydb = new NDb(this);
 
         btnadd = findViewById(R.id.btnadd);
@@ -213,6 +213,18 @@ public class HomeActivity extends AppCompatActivity
         super.onStart();
     }
 
+    protected Boolean isActivityRunning(Class activityClass) {
+        ActivityManager activityManager = (ActivityManager) getBaseContext().getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> tasks = activityManager.getRunningTasks(Integer.MAX_VALUE);
+
+        for (ActivityManager.RunningTaskInfo task : tasks) {
+            if (activityClass.getCanonicalName().equalsIgnoreCase(task.baseActivity.getClassName()))
+                return true;
+        }
+
+        return false;
+    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -255,14 +267,19 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.app_bar_search) {
-            startActivity(new Intent(getApplicationContext(), SearchListActivity.class));
+            if (!isActivityRunning(SearchListActivity.class)) {
+                startActivity(new Intent(getApplicationContext(), SearchListActivity.class));
+            }
         } else if (id == R.id.nav_notes) {
-            startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-            finish();
+            if (!isActivityRunning(HomeActivity.class)) {
+                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                finish();
+            }
         } else if (id == R.id.nav_settings) {
-            startActivity(new Intent(getApplicationContext(), Setting.class));
+            if (!isActivityRunning(Setting.class)) {
+                startActivity(new Intent(getApplicationContext(), Setting.class));
+            }
         } else if (id == R.id.nav_about) {
-
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

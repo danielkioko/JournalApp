@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
             <TextView
                 android:id="@+id/paperPenToolbarTitleInSettings"
                 android:layout_width="wrap_content"
@@ -31,6 +32,7 @@
                 android:layout_marginBottom="8dp"
                 android:gravity="center"
                 android:text="PaperPen"
+                android:textColor="@color/lynxWhite"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -137,7 +139,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="@string/your_notes_will_be_backed_up_daily"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/backup_switch"
                 app:layout_constraintTop_toBottomOf="@+id/backup_switch" />

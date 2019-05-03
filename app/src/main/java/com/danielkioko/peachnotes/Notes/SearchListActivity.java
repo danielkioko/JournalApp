@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
-import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -66,8 +65,9 @@ public class SearchListActivity extends AppCompatActivity {
                 R.id.txtdate
         };
 
-        adapter = new SimpleCursorAdapter(this, R.layout.list_template, c, fieldNames,
+        adapter = new SimpleCursorAdapter(this, R.layout.search_list_template, c, fieldNames,
                 display, 0);
+        listView.setScrollBarSize(0);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -75,11 +75,7 @@ public class SearchListActivity extends AppCompatActivity {
                                     long arg3) {
 
                 ConstraintLayout constraintLayoutParent = (ConstraintLayout) arg1;
-                CardView cardView = (CardView) constraintLayoutParent.getChildAt(1);
-                ConstraintLayout constraintLayoutChild = (ConstraintLayout)
-                        cardView.getChildAt(0);
-
-                TextView m = (TextView) constraintLayoutChild.getChildAt(1);
+                TextView m = (TextView) constraintLayoutParent.getChildAt(0);
                 Bundle dataBundle = new Bundle();
                 dataBundle.putInt("id", Integer.parseInt(m.getText().toString()));
                 Intent intent = new Intent(getApplicationContext(),

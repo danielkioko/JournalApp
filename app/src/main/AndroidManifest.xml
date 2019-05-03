@@ -17,28 +17,7 @@
         android:icon="@mipmap/ic_launcher_icon"
         android:label="@string/app_name"
         android:supportsRtl="true">
-        <service
-            android:name=".Reminders.ToneService"
-            android:enabled="true"
-            android:exported="true"></service>
 
-        <receiver
-            android:name=".Reminders.AlarmReceiver"
-            android:enabled="true"
-            android:exported="true" />
-
-        <activity
-            android:name=".Reminders.NewRemiderActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Reminders.ReminderActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity android:name=".Notes.SearchListActivity" />
 
         <meta-data
@@ -50,7 +29,13 @@
 
         <activity
             android:name=".Authentication.SplashActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <service
             android:name=".BackupService"
@@ -72,6 +57,7 @@
             android:name=".Notes.HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>
